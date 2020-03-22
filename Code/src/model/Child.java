@@ -1,19 +1,73 @@
 package model;
 
 public class Child{
+
+    //  Fields
     private int id;
     private String firstName;
     private String lastName;
     private int age;
     private String cpr;
-    private Parent parent;
+    private int parentId;
 
-    public Child(int id, String firstName, String lastName, int age, String cpr, Parent parent) {
+    //  Constructors
+    public Child() {}
+
+    public Child(int id, String firstName, String lastName, int age, String cpr, int parentId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.cpr = cpr;
-        this.parent = parent;
+        this.parentId = parentId;
+    }
+
+    //  Getters & Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getCpr() {
+        return cpr;
+    }
+
+    public void setCpr(String cpr) {
+        this.cpr = cpr;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 }
