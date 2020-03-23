@@ -1,0 +1,3 @@
+1   Sandra Madsen 250785-1285 sandra_madsen@gmail.dk 54253789 ADMINISTRATOR 300 20
+2   Jakob Carlstensen 231257-2358 jakob.carl@hotmail.com 6948439 TEACHER 200 10
+3   Anja Winther 070290-2356 wintheranja90@yahoo.com 5067293 NURSE 150 15

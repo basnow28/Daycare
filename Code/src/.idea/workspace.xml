@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="92414880-5113-4629-885c-678e7bed30b3" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1ZPS4VeiZVsXHSjjzYVp6TokE8F" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="92414880-5113-4629-885c-678e7bed30b3" name="Default Changelist" comment="" />
+      <created>1584739044644</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584739044644</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="275" y="23" key="#Notifications" timestamp="1584771260254">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="23" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1584771260254" />
+    <state x="531" y="254" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1584771143131">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="531" y="254" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728@0.0.1366.728" timestamp="1584771143131" />
+    <state x="463" y="120" key="FileChooserDialogImpl" timestamp="1584771472498">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="120" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1584771472498" />
+    <state x="184" y="7" key="SettingsEditor" timestamp="1584771229035">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584771229035" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1584771034413">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1584771034413" />
+    <state x="65" y="0" key="new project wizard" timestamp="1584771422812">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1584771422812" />
+    <state x="346" y="49" key="search.everywhere.popup" timestamp="1584771450578">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1584771450578" />
+  </component>
+</project>
