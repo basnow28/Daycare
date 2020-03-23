@@ -1,0 +1,5 @@
+#ignore .idea/workspace
+.idea/workspace.xml
+
+#ignore .class files
+out/

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d8ff8fbb-3b41-4d4b-82e8-998ac7a000c5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/children.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employees.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parents.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/Validation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Child.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Child.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/ChildrenMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ChildrenMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/EmployeeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/EmployeeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/WaitingListMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WaitingListMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/WorkScheduleMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/WorkScheduleMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Design-VP/daycare.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Design-VP/daycare.vpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1ZMPZx7PDiAOUJkZkBQ9yAdUIR3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/fileManagement" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/fileManagement" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/fileManagement" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="model" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.App" />
+      <module name="Code" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d8ff8fbb-3b41-4d4b-82e8-998ac7a000c5" name="Default Changelist" comment="" />
+      <created>1584646048635</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584646048635</updated>
+      <workItem from="1584646049736" duration="5181000" />
+      <workItem from="1584950293847" duration="9819000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="451" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584958587847">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="451" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1584958587847" />
+    <state x="801" y="272" width="374" height="659" key="#com.intellij.ide.util.MemberChooser" timestamp="1584951659058">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="801" y="272" width="374" height="659" key="#com.intellij.ide.util.MemberChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1584951659058" />
+    <state x="725" y="335" width="525" height="443" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1584958583789">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="725" y="335" width="525" height="443" key="#com.intellij.ide.util.TreeClassChooserDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1584958583789" />
+    <state x="746" y="448" width="494" height="226" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1584951856497">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="746" y="448" width="494" height="226" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/67.27.1853.1053@67.27.1853.1053" timestamp="1584951856497" />
+    <state width="1807" height="275" key="GridCell.Tab.0.bottom" timestamp="1584963118502">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="275" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1584963118502" />
+    <state width="1807" height="275" key="GridCell.Tab.0.center" timestamp="1584963118502">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="275" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1584963118502" />
+    <state width="1807" height="275" key="GridCell.Tab.0.left" timestamp="1584963118502">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="275" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1584963118502" />
+    <state width="1807" height="275" key="GridCell.Tab.0.right" timestamp="1584963118502">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="275" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1584963118502" />
+    <state width="1807" height="340" key="GridCell.Tab.1.bottom" timestamp="1584951234515">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="340" key="GridCell.Tab.1.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1584951234515" />
+    <state width="1807" height="340" key="GridCell.Tab.1.center" timestamp="1584951234515">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="340" key="GridCell.Tab.1.center/67.27.1853.1053@67.27.1853.1053" timestamp="1584951234515" />
+    <state width="1807" height="340" key="GridCell.Tab.1.left" timestamp="1584951234515">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="340" key="GridCell.Tab.1.left/67.27.1853.1053@67.27.1853.1053" timestamp="1584951234515" />
+    <state width="1807" height="340" key="GridCell.Tab.1.right" timestamp="1584951234515">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="340" key="GridCell.Tab.1.right/67.27.1853.1053@67.27.1853.1053" timestamp="1584951234515" />
+    <state x="429" y="91" width="1024" height="852" key="SettingsEditor" timestamp="1584647078962">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="429" y="91" width="1024" height="852" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1584647078962" />
+    <state x="764" y="468" width="448" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584647131432">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="764" y="468" width="448" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1584647131432" />
+  </component>
+</project>
