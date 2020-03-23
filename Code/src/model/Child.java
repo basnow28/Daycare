@@ -13,7 +13,7 @@ public class Child{
     //  Constructors
     public Child() {}
 
-    public Child(int id, String firstName, String lastName, int age, String cpr, int parentId) {
+    public Child(int id, String firstName, String lastName, int age, String cpr) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,7 +21,14 @@ public class Child{
         this.cpr = cpr;
         this.parentId = parentId;
     }
+    public Child(int id, String firstName, String lastName, int age, String cpr, int parentId) {
+        this(id, firstName, lastName, age, cpr);
+        this.parentId = parentId;
+    }
 
+    public String toStringConsole(){
+        return String.join(" ", Integer.toString(id), firstName, lastName, cpr, Integer.toString(parentId));
+    }
     //  Getters & Setters
     public int getId() {
         return id;

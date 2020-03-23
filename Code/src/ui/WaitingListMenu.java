@@ -4,7 +4,7 @@ import java.io.*;
 public class WaitingListMenu{
     public WaitingListMenu(){}
 
-    public static void displayWaitingListMenu() throws FileNotFoundException {
+    public static void displayWaitingListMenu(){
         System.out.println("\t\t\t -MANAGE WAITING LIST MENU- \t\t\t");
         System.out.println("1. Display the waiting list");
         System.out.println("2. Add a child's information to the waiting list ");
@@ -12,14 +12,14 @@ public class WaitingListMenu{
         System.out.println("4. Exit");
     }
 
-    public static void displaySearchWaitingListMenu() throws FileNotFoundException {
+    public static void displaySearchWaitingListMenu(){
         System.out.println("Do you wish to perform further operations such as: ");
         System.out.println("1. Update the child's information");
         System.out.println("2. Remove the child from the waiting list");
         System.out.println("3. Exit");
     }
 
-    public static void waitingListMenu() throws FileNotFoundException {
+    public static void waitingListMenu(){
         String choice = "-1";
         do {
             displayWaitingListMenu();
@@ -49,7 +49,7 @@ public class WaitingListMenu{
         } while (!choice.equals("5"));
     }
 
-    public static void searchWaitingListMenu() throws FileNotFoundException {
+    public static void searchWaitingListMenu(){
         String choice = "-1";
         do {
             displaySearchWaitingListMenu();

@@ -21,5 +21,19 @@ public class Database{
         //dbC.uploadChildren(children , filename)
     }
 
+    public ArrayList<Child> getChildren() {
+        return children;
+    }
 
+    public ArrayList<WorkSchedule> getWorkSchedules() {
+        return workSchedules;
+    }
+
+    public ArrayList<Employee> getEmployees() {
+        return employees;
+    }
+
+    public ArrayList<Parent> getParents() {
+        return parents;
+    }
 }

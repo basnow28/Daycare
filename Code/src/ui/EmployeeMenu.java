@@ -5,7 +5,7 @@ public class EmployeeMenu{
 
     public EmployeeMenu() {}
 
-    public static void displayEmployeeMenu() throws FileNotFoundException {
+    public static void displayEmployeeMenu(){
         System.out.println("\t\t\t -MANAGE EMPLOYEE MENU- \t\t\t");
         System.out.println("1. Display information on employees");
         System.out.println("2. Add a new employee ");
@@ -13,14 +13,14 @@ public class EmployeeMenu{
         System.out.println("4. Exit");
     }
 
-    public static void displaySearchEmployeeMenu() throws FileNotFoundException {
+    public static void displaySearchEmployeeMenu(){
         System.out.println("Do you wish to perform further operations such as: ");
         System.out.println("1. Update the employee's information");
         System.out.println("2. Remove the employee");
         System.out.println("3. Exit");
     }
 
-    public static void employeeMenu() throws FileNotFoundException {
+    public static void employeeMenu(){
         String choice = "-1";
         do {
             displayEmployeeMenu();
@@ -50,7 +50,7 @@ public class EmployeeMenu{
         } while (!choice.equals("5"));
     }
 
-    public static void searchEmployeeMenu() throws FileNotFoundException {
+    public static void searchEmployeeMenu(){
         String choice = "-1";
         do {
             displaySearchEmployeeMenu();

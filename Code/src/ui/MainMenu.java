@@ -2,15 +2,20 @@ package ui;
 import controller.Controller;
 
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 //If any action will be performed in the Menus use App.getController() to get controller instance
 // Bianca - for now do not dispatch any actions, but create the menus where you can just switch between different options
 //and get input data when creating/updating and validate this data
 
 public class MainMenu {
-    public MainMenu(){}
+    private static Scanner scanner = new Scanner(System.in);
 
-    public void displayMainMenuAdmin() throws FileNotFoundException {
+    public MainMenu(){
+        mainMenuAdmin();
+    }
+
+    private static void displayMainMenuAdmin(){
         System.out.println("\t\t\t -MENU- \t\t\t");
         System.out.println("1. Manage children menu");
         System.out.println("2. Manage employee menu");
@@ -20,7 +25,7 @@ public class MainMenu {
     }
 
     // to me it makes sense to only have 2 options for employees, obviously we can change this after
-    public void displayMainMenuEmployee() throws FileNotFoundException {
+    private static void displayMainMenuEmployee(){
         System.out.println("\t\t\t -MENU- \t\t\t");
         System.out.println("1. View children's information on specific quarter");
         System.out.println("2. View work schedule");
@@ -32,16 +37,16 @@ public class MainMenu {
 
 
 
-    public void mainMenuAdmin() throws FileNotFoundException {
+    public static void mainMenuAdmin(){
         String choice = "-1";
         do {
             displayMainMenuAdmin();
-
+            choice = scanner.next();
             switch (choice) {
                 case "1":
-                    //printEmptyLines();
-                    //ChildrenMenu.childrenMenu();
-                    //printEmptyLines();
+                    printEmptyLines();
+                    ChildrenMenu.childrenMenu();
+                    printEmptyLines();
                     break;
 
                 case "2":
@@ -69,7 +74,7 @@ public class MainMenu {
         } while (!choice.equals("6"));
     }
 
-    public void mainMenuForEmployee() throws FileNotFoundException {
+    private static void mainMenuForEmployee(){
         String choice = "-1";
         do {
             displayMainMenuEmployee();
@@ -94,7 +99,7 @@ public class MainMenu {
         } while (!choice.equals("4"));
     }
 
-    public void printEmptyLines() {
+    public static void printEmptyLines() {
         System.out.println();
         System.out.println();
         System.out.println();
