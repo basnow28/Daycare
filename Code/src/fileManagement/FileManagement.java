@@ -1,9 +1,6 @@
 package fileManagement;
 
-import model.Child;
-import model.Employee;
-import model.EmployeeType;
-import model.Parent;
+import model.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,12 +9,13 @@ import java.util.ArrayList;
 public class FileManagement {
 
     //read file and data into the corresponding arrayList
-    public void inputFromFile(ArrayList<Child> children, ArrayList<Parent> parents, ArrayList<Employee> employees,
-                              String childFileName, String parentFileName, String employeeFileName) throws IOException {
+    public void inputFromFile(ArrayList<Child> children, ArrayList<Parent> parents, ArrayList<Employee> employees, ArrayList<WaitingList> waitingLists,
+                              String childFileName, String parentFileName, String employeeFileName, String waitingListFilename) throws IOException {
 
         inputChildren(children,childFileName);
         inputParents(parents,parentFileName);
         inputEmployees(employees,employeeFileName);
+        inputWaitingLists(waitingLists, waitingListFilename);
     }
 
     public void inputChildren(ArrayList<Child> children, String fileName) throws IOException {
@@ -89,6 +87,27 @@ public class FileManagement {
 
             Employee employee = new Employee(id,firstName, lastName, cpr, email, phoneNumber, type, salary, workingHours);
             employees.add(employee);
+        }
+    }
+    public void inputWaitingLists(ArrayList<WaitingList> waitingLists, String fileName) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+
+        String line = "", year, childrenIds;
+        int id, capacity;
+        Quarter quarter;
+
+        while((line = br.readLine()) != null) {
+            String[] split = line.split("\\s+");
+
+            //WAITING LIST
+            id = Integer.parseInt(split[0]);
+            quarter = Quarter.valueOf(split[1]);
+            year = split[2];
+            capacity = Integer.parseInt(split[3]);
+            childrenIds = split[4];
+
+            WaitingList waitingList = new WaitingList(id, quarter, year, capacity, childrenIds);
+            waitingLists.add(waitingList);
         }
     }
 

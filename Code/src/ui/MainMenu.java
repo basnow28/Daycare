@@ -57,7 +57,7 @@ public class MainMenu {
 
                 case "3":
                     //printEmptyLines();
-                    //WaitingListMenu.waitingListMenu();
+                    //ListMenu.waitingListMenu();
                     //printEmptyLines();
                     break;
 

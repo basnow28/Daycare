@@ -22,7 +22,7 @@ public class ChildrenMenu{
     public static void displaySearchChildMenu(){
         System.out.println("Do you wish to perform further operations such as: ");
         System.out.println("1. Update the child's information");
-        System.out.println("2. Remove the child from the quarter");
+        System.out.println("2. Remove the child from the list");
         System.out.println("3. Exit");
     }
 
@@ -34,9 +34,9 @@ public class ChildrenMenu{
 
             switch (choice) {
                 case "1":
-                    //MainMenu.printEmptyLines();
+                    MainMenu.printEmptyLines();
                     //App.getController().displayChild();
-                    //MainMenu.printEmptyLines();
+                    MainMenu.printEmptyLines();
                     break;
 
                 case "2":
