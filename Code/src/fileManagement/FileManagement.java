@@ -1,23 +1,27 @@
 package fileManagement;
 
-import model.Child;
-import model.Employee;
-import model.EmployeeType;
-import model.Parent;
+import model.*;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class FileManagement {
 
-    //read file and data into the corresponding arrayList
+    //  Input From Files
     public void inputFromFile(ArrayList<Child> children, ArrayList<Parent> parents, ArrayList<Employee> employees,
-                              String childFileName, String parentFileName, String employeeFileName) throws IOException {
+                              ArrayList<Shift> shifts, ArrayList<WorkSchedule> workSchedules, String childFileName,
+                              String parentFileName, String employeeFileName, String shiftFileName,
+                              String workScheduleFileName) throws IOException, ParseException {
 
         inputChildren(children,childFileName);
         inputParents(parents,parentFileName);
         inputEmployees(employees,employeeFileName);
+        inputShifts(shifts,shiftFileName);
+        inputWorkSchedules(workSchedules,workScheduleFileName);
     }
 
     public void inputChildren(ArrayList<Child> children, String fileName) throws IOException {
@@ -92,8 +96,50 @@ public class FileManagement {
         }
     }
 
-    //Modify (in)
+    public void inputShifts(ArrayList<Shift> shifts, String fileName) throws IOException, ParseException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
 
+        String line = "", startTime, endTime;
+        ShiftType shiftType;
+        EmployeeType employeeType;
+        Date date;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMMM-yyyy");
+
+        while((line = br.readLine()) != null) {
+            String[] split = line.split("\\s+");
+
+            //SHIFT
+            startTime = split[0];
+            endTime = split[1];
+            shiftType = ShiftType.valueOf(split[2]);
+            employeeType = EmployeeType.valueOf(split[3]);
+            date = formatter.parse(split[4]);
+
+            Shift shift = new Shift(startTime, endTime, shiftType,employeeType,date);
+            shifts.add(shift);
+        }
+    }
+
+    public void inputWorkSchedules(ArrayList<WorkSchedule> workSchedules, String fileName) throws IOException, ParseException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+
+        String line = "", shifts;
+        int id, employeeId;
+
+        while((line = br.readLine()) != null) {
+            String[] split = line.split("\\s+");
+
+            //WORK SCHEDULE
+            id = Integer.parseInt(split[0]);
+            employeeId = Integer.parseInt(split[1]);
+            shifts = split[2];
+
+            WorkSchedule workSchedule = new WorkSchedule(id,employeeId, shifts);
+            workSchedules.add(workSchedule);
+        }
+    }
+
+    //Modify (in)
     public void modifyFile(String oldLine, String newLine, String fileName, ArrayList<?> arr) throws IOException   {
         String line = "";
         String oldText = "";
@@ -120,7 +166,6 @@ public class FileManagement {
     }
 
     //Delete (from)
-
     public void deleteFromFile(String lineToDelete, String fileName, ArrayList <?> arr)  throws FileNotFoundException, IOException{
         File inputFile = new File(fileName);
         File tempFile = new File("myTempFile.txt");

@@ -22,7 +22,6 @@ public class Parent extends Person{
     }
 
     //  Printing
-
     @Override
     public String toString() {
         return "Parent{" +
