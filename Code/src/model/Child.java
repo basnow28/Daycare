@@ -26,9 +26,7 @@ public class Child{
         this.parentId = parentId;
     }
 
-    public String toStringConsole(){
-        return String.join(" ", Integer.toString(id), firstName, lastName, cpr, Integer.toString(parentId));
-    }
+
     //  Getters & Setters
     public int getId() {
         return id;
@@ -76,5 +74,11 @@ public class Child{
 
     public void setParentId(int parentId) {
         this.parentId = parentId;
+    }
+
+    //  Printing
+    public String toStringConsole(){
+        return String.join(" ", Integer.toString(id), firstName, lastName, Integer.toString(age),
+                cpr, Integer.toString(parentId));   //age was missing
     }
 }

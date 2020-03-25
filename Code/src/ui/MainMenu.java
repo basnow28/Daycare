@@ -28,6 +28,8 @@ public class MainMenu {
     private static void displayMainMenuEmployee(){
         System.out.println("\t\t\t -MENU- \t\t\t");
         System.out.println("1. View children's information on specific quarter");
+        //the employee should also be able to book a shift
+        //System.out.println("3. Book a shift");
         System.out.println("2. View work schedule");
         System.out.println("3. Exit");
     }
@@ -62,9 +64,9 @@ public class MainMenu {
                     break;
 
                 case "4":
-                    //printEmptyLines();
-                    //WorkScheduleMenu.workScheduleMenu();
-                    //printEmptyLines();
+                    printEmptyLines();
+                    WorkScheduleMenu.workScheduleMenu();
+                    printEmptyLines();
                     break;
 
 
