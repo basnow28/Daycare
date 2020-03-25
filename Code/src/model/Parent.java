@@ -30,4 +30,8 @@ public class Parent extends Person{
                 "childId=" + childId +
                 '}';
     }
+
+    public String toStringConsole(){
+        return super.toStringConsole() + "\t" + Integer.toString(childId);
+    }
 }

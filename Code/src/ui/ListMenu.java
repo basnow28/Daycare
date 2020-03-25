@@ -2,8 +2,10 @@ package ui;
 import main.App;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class ListMenu {
+    private static Scanner scanner = new Scanner(System.in);
     public ListMenu(){}
 
     public static void displayListMenu(){
@@ -25,7 +27,7 @@ public class ListMenu {
         String choice = "-1";
         do {
             displayListMenu();
-
+            choice = scanner.next();
             switch (choice) {
                 case "1":
                     MainMenu.printEmptyLines();
@@ -76,6 +78,6 @@ public class ListMenu {
     }
 
     private static void displayCurrentList(){
-        App.getController().getChildrenFromList(0);
+        System.out.println(App.getController().getChildrenFromList(0).toString());
     }
 }

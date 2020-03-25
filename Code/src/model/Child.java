@@ -27,7 +27,11 @@ public class Child{
     }
 
     public String toStringConsole(){
-        return String.join(" ", Integer.toString(id), firstName, lastName, cpr, Integer.toString(parentId));
+        return String.join("\t", Integer.toString(id), firstName, lastName, Integer.toString(age), cpr, Integer.toString(parentId));
+    }
+
+    public String toString(){
+        return String.join(" ", Integer.toString(id), firstName, lastName, cpr);
     }
     //  Getters & Setters
     public int getId() {

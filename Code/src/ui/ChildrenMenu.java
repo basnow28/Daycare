@@ -1,6 +1,8 @@
 package ui;
 import java.io.*;
 import java.util.Scanner;
+
+import controller.Controller;
 import main.App;
 
 // I remember we talked about having the delete and update in the search option, so they only need to be connected
@@ -99,5 +101,15 @@ public class ChildrenMenu{
         String email = validation.getValidatedEmail("Parent's email address?");
         String phoneNumber = validation.getValidatedPhone("Parent's phone number?");
         App.getController().createParent(firstName, lastName, cpr, email, phoneNumber, childId);
+        addChildToWaitingList(childId);
+    }
+
+    private static void addChildToWaitingList(int childId){
+        System.out.println("Do you wish to add the child to one of the waiting lists?");
+        System.out.println(App.getController().getWaitingLists().toString());
+        System.out.println("Which waiting list do you choose? Write down the id");
+        String listId = scanner.next();
+        App.getController().addChildToWaitingList(childId, listId);
+        System.out.println(App.getController().getWaitingLists());
     }
 }

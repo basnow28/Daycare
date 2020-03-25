@@ -82,4 +82,8 @@ public abstract class Person {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' + ", ";
     }
+
+    public String toStringConsole(){
+        return String.join("\t", Integer.toString(id), firstName, lastName, cpr, email, phoneNumber);
+    }
 }

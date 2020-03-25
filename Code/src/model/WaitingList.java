@@ -40,6 +40,6 @@ public class WaitingList{
     }
 
     public String toString(){
-        return this.quarter + " " + year + childrenIds.toString();
+        return this.id + " " + this.quarter + " " + year + childrenIds.toString();
     }
 }

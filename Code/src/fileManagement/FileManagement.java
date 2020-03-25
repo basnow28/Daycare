@@ -38,6 +38,7 @@ public class FileManagement {
             Child child = new Child(id,firstName, lastName, age, cpr,parentId);
             children.add(child);
         }
+        br.close();
     }
 
     public void inputParents(ArrayList<Parent> parents, String fileName) throws IOException {
@@ -61,6 +62,7 @@ public class FileManagement {
             Parent parent = new Parent(id,firstName, lastName, cpr, email, phoneNumber, childId);
             parents.add(parent);
         }
+        br.close();
     }
 
     public void inputEmployees(ArrayList<Employee> employees, String fileName) throws IOException {
@@ -88,6 +90,7 @@ public class FileManagement {
             Employee employee = new Employee(id,firstName, lastName, cpr, email, phoneNumber, type, salary, workingHours);
             employees.add(employee);
         }
+        br.close();
     }
     public void inputWaitingLists(ArrayList<WaitingList> waitingLists, String fileName) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -109,6 +112,7 @@ public class FileManagement {
             WaitingList waitingList = new WaitingList(id, quarter, year, capacity, childrenIds);
             waitingLists.add(waitingList);
         }
+        br.close();
     }
 
     //Modify (in)
@@ -165,5 +169,15 @@ public class FileManagement {
         final boolean WRITABLE = inputFile.setWritable(true);
         boolean delete = inputFile.delete();
         boolean successful = tempFile.renameTo(inputFile);
+    }
+
+    public void addNewLineToFile(String line, int arraySize, String fileName) throws IOException{
+        BufferedWriter output = new BufferedWriter(new FileWriter(fileName, true));    //Append
+
+        if(arraySize != 0) {
+            output.newLine();
+        }
+        output.write(line);
+        output.close();
     }
 }
