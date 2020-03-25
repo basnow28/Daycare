@@ -28,7 +28,7 @@ public class ChildrenMenu{
         System.out.println("3. Exit");
     }
 
-    public static void childrenMenu(){
+    public static void childrenMenu() throws InterruptedException, IOException {
         String choice = "-1";
         do {
             displayChildrenMenu();

@@ -2,6 +2,7 @@ package ui;
 import controller.Controller;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 //If any action will be performed in the Menus use App.getController() to get controller instance
@@ -11,7 +12,7 @@ import java.util.Scanner;
 public class MainMenu {
     private static Scanner scanner = new Scanner(System.in);
 
-    public MainMenu(){
+    public MainMenu() throws InterruptedException, IOException {
         mainMenuAdmin();
     }
 
@@ -39,7 +40,7 @@ public class MainMenu {
 
 
 
-    public static void mainMenuAdmin(){
+    public static void mainMenuAdmin() throws InterruptedException, IOException {
         String choice = "-1";
         do {
             displayMainMenuAdmin();
@@ -73,7 +74,7 @@ public class MainMenu {
                 case "5":
                     break;
             }
-        } while (!choice.equals("6"));
+        } while (!choice.equals("5"));
     }
 
     private static void mainMenuForEmployee(){
