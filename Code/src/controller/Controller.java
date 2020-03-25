@@ -1,19 +1,24 @@
 package controller;
 import fileManagement.FileManagement;
-import model.Child;
-import model.Database;
-import model.Parent;
-import model.Shift;
+import model.*;
+import ui.Validation;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 
 public class Controller {
+    //  Fields
     private static Database database;
     private static FileManagement fm;
 
+    //  Instantiate Validation Object
+    Validation validation = new Validation();
+
+    //  Constructors
     public Controller() {
         database = new Database();
         fm = new FileManagement();
@@ -51,4 +56,17 @@ public class Controller {
     }
 
 
+    public void createWorkSchedule() {
+        WorkSchedule workSchedule = new WorkSchedule();
+
+        System.out.println("In order to create a new work schedule please enter the following:");
+
+        workSchedule.setId(database.getWorkSchedules().size());
+
+        workSchedule.setEmployeeId(validation.getValidatedInt("Employee ID"));
+
+        workSchedule.setShiftIds(validation.getValidatedIds("Shift IDs"));
+
+        database.getWorkSchedules().add(workSchedule);
+    }
 }
