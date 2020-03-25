@@ -152,7 +152,7 @@ public class FileManagement {
         int id, employeeId;
 
         while((line = br.readLine()) != null) {
-            String[] split = line.split("\\s+");
+            String[] split = line.split("  ");
 
             //WORK SCHEDULE
             id = Integer.parseInt(split[0]);
@@ -169,11 +169,9 @@ public class FileManagement {
         String line = "";
         String oldText = "";
         BufferedReader input = new BufferedReader(new FileReader(fileName));
-
         int lineNr = 0;
         while((line = input.readLine())!= null)  {
             lineNr++;
-
             if(lineNr != arr.size()) {
                 oldText += line + "\r\n";
             }  else {
@@ -183,7 +181,7 @@ public class FileManagement {
 
         input.close();
 
-        String newText = oldText.replaceAll(oldLine,newLine);
+        String newText = oldText.replace(oldLine,newLine);
 
         FileWriter output = new FileWriter(fileName);
         output.write(newText);
