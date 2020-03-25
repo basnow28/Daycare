@@ -16,9 +16,6 @@ public class Controller {
     private static Scanner scanner = new Scanner(System.in);
     private static Validation validation = new Validation();
 
-    //  Instantiate Validation Object
-    Validation validation = new Validation();
-
     //  Constructors
     public Controller() {
         database = new Database();
