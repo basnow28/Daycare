@@ -14,7 +14,7 @@ public class Controller {
     private static Database database;
     private static FileManagement fm;
     private static Scanner scanner = new Scanner(System.in);
-
+    private static Validation validation = new Validation();
     //  Constructors
     public Controller() {
         database = new Database();

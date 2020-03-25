@@ -87,12 +87,12 @@ public class EmployeeMenu{
         String cpr = validation.getValidateCpr("Employee's cpr number?");
         String email = validation.getValidatedEmail("Employee's email?");
         String phoneNumber = validation.getValidatedPhone("Employee's phone number?");
-        //type
+        String type = validation.getValidatedEmployeeType("");
         System.out.println("Employee's salary?");
         double salary = scanner.nextInt();
         System.out.println("Employee's working hours?");
         int workingHours = scanner.nextInt();
-        employeeId = App.getController().createChild(firstName, lastName, cpr, email, phoneNumber, type, salary, workingHours);
+        employeeId = App.getController().createEmployee(firstName, lastName, cpr, email, phoneNumber, EmployeeType.valueOf(type), salary, workingHours);
         createEmployee(employeeId);
     }
 }

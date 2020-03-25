@@ -118,6 +118,10 @@ public class Validation {
         System.out.println("Invalid phone number. Should have 8 digits. Try again");
         return getValidatedEmail(message);
     }
+
+    public String getValidatedEmployeeType(String s) {
+        return "";
+    }
 }
 
 
