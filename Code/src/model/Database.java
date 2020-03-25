@@ -8,6 +8,7 @@ public class Database{
     private ArrayList<WorkSchedule> workSchedules;
     private ArrayList<Employee> employees;
     private ArrayList<Parent> parents;
+    private ArrayList<WaitingList> waitingLists;
     private ArrayList<Shift> shifts;
 
     public Database(){
@@ -16,9 +17,8 @@ public class Database{
         workSchedules = new ArrayList<WorkSchedule>();
         employees = new ArrayList<Employee>();
         parents = new ArrayList<Parent>();
+        waitingLists = new ArrayList<WaitingList>();
         shifts = new ArrayList<Shift>();
-
-
         // the loading of the data has to be in the constructor
         //all the loading needs to be managed by the DBConnection
         //dbC.uploadChildren(children , filename)
@@ -40,7 +40,15 @@ public class Database{
         return parents;
     }
 
+    public ArrayList<WaitingList> getWaitingLists() {
+        return waitingLists;
+    }
+
+    public WaitingList getList(int id){
+        return waitingLists.get(id);
+
     public ArrayList<Shift> getShifts() {
         return shifts;
+
     }
 }

@@ -10,16 +10,16 @@ import java.util.Date;
 
 
 public class FileManagement {
-
     //  Input From Files
     public void inputFromFile(ArrayList<Child> children, ArrayList<Parent> parents, ArrayList<Employee> employees,
-                              ArrayList<Shift> shifts, ArrayList<WorkSchedule> workSchedules, String childFileName,
+                              ArrayList<Shift> shifts, ArrayList<WorkSchedule> workSchedules,ArrayList<WaitingList> waitingLists, String childFileName,
                               String parentFileName, String employeeFileName, String shiftFileName,
-                              String workScheduleFileName) throws IOException, ParseException {
+                              String workScheduleFileName,String waitingListFilename) throws IOException, ParseException {
 
         inputChildren(children,childFileName);
         inputParents(parents,parentFileName);
         inputEmployees(employees,employeeFileName);
+        inputWaitingLists(waitingLists, waitingListFilename);
         inputShifts(shifts,shiftFileName);
         inputWorkSchedules(workSchedules,workScheduleFileName);
     }
@@ -44,6 +44,7 @@ public class FileManagement {
             Child child = new Child(id,firstName, lastName, age, cpr,parentId);
             children.add(child);
         }
+        br.close();
     }
 
     public void inputParents(ArrayList<Parent> parents, String fileName) throws IOException {
@@ -67,6 +68,7 @@ public class FileManagement {
             Parent parent = new Parent(id,firstName, lastName, cpr, email, phoneNumber, childId);
             parents.add(parent);
         }
+        br.close();
     }
 
     public void inputEmployees(ArrayList<Employee> employees, String fileName) throws IOException {
@@ -94,6 +96,29 @@ public class FileManagement {
             Employee employee = new Employee(id,firstName, lastName, cpr, email, phoneNumber, type, salary, workingHours);
             employees.add(employee);
         }
+        br.close();
+    }
+    public void inputWaitingLists(ArrayList<WaitingList> waitingLists, String fileName) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+
+        String line = "", year, childrenIds;
+        int id, capacity;
+        Quarter quarter;
+
+        while((line = br.readLine()) != null) {
+            String[] split = line.split("\\s+");
+
+            //WAITING LIST
+            id = Integer.parseInt(split[0]);
+            quarter = Quarter.valueOf(split[1]);
+            year = split[2];
+            capacity = Integer.parseInt(split[3]);
+            childrenIds = split[4];
+
+            WaitingList waitingList = new WaitingList(id, quarter, year, capacity, childrenIds);
+            waitingLists.add(waitingList);
+        }
+        br.close();
     }
 
     public void inputShifts(ArrayList<Shift> shifts, String fileName) throws IOException, ParseException {
@@ -191,5 +216,15 @@ public class FileManagement {
         final boolean WRITABLE = inputFile.setWritable(true);
         boolean delete = inputFile.delete();
         boolean successful = tempFile.renameTo(inputFile);
+    }
+
+    public void addNewLineToFile(String line, int arraySize, String fileName) throws IOException{
+        BufferedWriter output = new BufferedWriter(new FileWriter(fileName, true));    //Append
+
+        if(arraySize != 0) {
+            output.newLine();
+        }
+        output.write(line);
+        output.close();
     }
 }
