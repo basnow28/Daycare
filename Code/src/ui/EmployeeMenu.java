@@ -1,7 +1,14 @@
 package ui;
-import java.io.*;
+import main.App;
+import model.EmployeeType;
+
+import java.util.*;
+
 
 public class EmployeeMenu{
+
+    private static Validation validation = new Validation();
+    private static Scanner scanner = new Scanner(System.in);
 
     public EmployeeMenu() {}
 
@@ -72,5 +79,20 @@ public class EmployeeMenu{
                     break;
             }
         } while (!choice.equals("4"));
+    }
+
+    private static void createEmployee(int employeeId){
+        String firstName = validation.getValidatedName("Employee's first name?");
+        String lastName = validation.getValidatedName("Employee's last name?");
+        String cpr = validation.getValidateCpr("Employee's cpr number?");
+        String email = validation.getValidatedEmail("Employee's email?");
+        String phoneNumber = validation.getValidatedPhone("Employee's phone number?");
+        //type
+        System.out.println("Employee's salary?");
+        double salary = scanner.nextInt();
+        System.out.println("Employee's working hours?");
+        int workingHours = scanner.nextInt();
+        employeeId = App.getController().createChild(firstName, lastName, cpr, email, phoneNumber, type, salary, workingHours);
+        createEmployee(employeeId);
     }
 }
