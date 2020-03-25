@@ -1,11 +1,19 @@
 package ui;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validation {
     private static Scanner scanner = new Scanner(System.in);
+
+    private boolean validateInt(String number) {
+        Pattern pattern =  Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(number);
+        return matcher.matches();
+    }
 
     private boolean validateName(String name){
         Pattern pattern = Pattern.compile("[A-Za-z]+");
@@ -35,6 +43,30 @@ public class Validation {
         Pattern pattern = Pattern.compile("\\d{8}");
         Matcher matcher = pattern.matcher(phoneNumber);
         return matcher.matches();
+    }
+
+    public int getValidatedInt(String message) {
+        System.out.println(message);
+        String number = scanner.nextLine();
+        if(this.validateInt(number)) {
+            return Integer.parseInt(number);
+        }
+        return getValidatedInt("Invalid input. ID cannot contain any characters other than figures");
+    }
+
+    public ArrayList<Integer> getValidatedIds (String message) {
+        System.out.println(message);
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+
+        String input = scanner.nextLine();
+        String[] split = input.split("\\s+");   //any spaces
+        for(int i = 0; i < split.length; i++) {
+            if(!validateInt(split[i])) {
+                return getValidatedIds("Invalid Input. IDs can only be figures.");
+            }
+            ids.add(Integer.parseInt(split[i]));
+        }
+        return ids;
     }
 
     public String getValidatedName(String message){

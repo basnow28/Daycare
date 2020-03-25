@@ -25,14 +25,6 @@ public class Child{
         this(id, firstName, lastName, age, cpr);
         this.parentId = parentId;
     }
-
-    public String toStringConsole(){
-        return String.join("\t", Integer.toString(id), firstName, lastName, Integer.toString(age), cpr, Integer.toString(parentId));
-    }
-
-    public String toString(){
-        return String.join(" ", Integer.toString(id), firstName, lastName, cpr);
-    }
     //  Getters & Setters
     public int getId() {
         return id;
@@ -80,5 +72,14 @@ public class Child{
 
     public void setParentId(int parentId) {
         this.parentId = parentId;
+    }
+
+    //  Printing
+    public String toStringConsole(){
+        return String.join("\t", Integer.toString(id), firstName, lastName, Integer.toString(age),
+                cpr, Integer.toString(parentId));   //age was missing
+    }
+    public String toString(){
+        return String.join(" ", Integer.toString(id), firstName, lastName, cpr);
     }
 }
