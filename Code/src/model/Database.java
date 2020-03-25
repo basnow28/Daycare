@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Database{
+public class Database {
     private DBConnection dbC;
     private ArrayList<Child> children;
     private ArrayList<WorkSchedule> workSchedules;
@@ -44,11 +44,11 @@ public class Database{
         return waitingLists;
     }
 
-    public WaitingList getList(int id){
+    public WaitingList getList(int id) {
         return waitingLists.get(id);
+    }
 
     public ArrayList<Shift> getShifts() {
         return shifts;
-
     }
 }

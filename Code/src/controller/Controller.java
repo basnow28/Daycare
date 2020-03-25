@@ -14,7 +14,6 @@ public class Controller {
     private static Database database;
     private static FileManagement fm;
     private static Scanner scanner = new Scanner(System.in);
-    private static Validation validation = new Validation();
 
     //  Constructors
     public Controller() {
@@ -76,7 +75,7 @@ public class Controller {
 
     public void addChildToWaitingList(int childId, String listId) {
         database.getList(Integer.parseInt(listId)).addChild(childId);
-        database.getParents().add(new Parent(id, firstName, lastName, cpr, email, phoneNumber, childId ));
+        //database.getParents().add(new Parent(id, firstName, lastName, cpr, email, phoneNumber, childId ));
     }
 
     public void displayShifts() {
@@ -90,7 +89,6 @@ public class Controller {
             System.out.println(database.getWorkSchedules().get(i));
         }
     }
-
 
     public void createWorkSchedule() {
         WorkSchedule workSchedule = new WorkSchedule();
@@ -133,8 +131,8 @@ public class Controller {
         String phoneNumber = validation.getValidatedPhone(scanner.next());
         e.setPhoneNumber(phoneNumber);
         System.out.println("Enter the new type of employee:");
-        EmployeeType type = new EmployeeType();
-        e.setType(type);
+        //EmployeeType type = new EmployeeType();
+        //e.setType(type);
         System.out.println("Enter the new salary of the employee:");
         double salary = scanner.nextDouble();
         e.setSalary(salary);
