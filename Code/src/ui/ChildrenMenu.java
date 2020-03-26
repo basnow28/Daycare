@@ -16,7 +16,7 @@ public class ChildrenMenu{
     public static void displayChildrenMenu(){
         System.out.println("\t\t\t -MANAGE CHILDREN MENU- \t\t\t");
         System.out.println("1. Display information on children");
-        System.out.println("2. Add child from the Waiting list to the quarter");
+        System.out.println("2. Add new child to the Waiting list");
         System.out.println("3. Search for a child");
         System.out.println("4. Exit");
     }
@@ -89,7 +89,7 @@ public class ChildrenMenu{
         String firstName = validation.getValidatedName("Child's first name?");
         String lastName = validation.getValidatedName("Child's last name?");
         int age = validation.getValidatedAge("Child's age?");
-        String cpr = validation.getValidateCpr("Child's cpr number?");
+        String cpr = validation.getValidatedCpr("Child's cpr number?");
         int childId = App.getController().createChild(firstName, lastName, age, cpr);
         createParent(childId);
     }
@@ -97,7 +97,7 @@ public class ChildrenMenu{
     private static void createParent(int childId){
         String firstName = validation.getValidatedName("Parent's first name?");
         String lastName = validation.getValidatedName("Parent's last name?");
-        String cpr = validation.getValidateCpr("Parent's cpr number?");
+        String cpr = validation.getValidatedCpr("Parent's cpr number?");
         String email = validation.getValidatedEmail("Parent's email address?");
         String phoneNumber = validation.getValidatedPhone("Parent's phone number?");
         App.getController().createParent(firstName, lastName, cpr, email, phoneNumber, childId);
@@ -105,10 +105,9 @@ public class ChildrenMenu{
     }
 
     private static void addChildToWaitingList(int childId){
-        System.out.println("Do you wish to add the child to one of the waiting lists?");
+        System.out.println("To which waiting list would you like to add the child?");
         System.out.println(App.getController().getWaitingLists().toString());
-        System.out.println("Which waiting list do you choose? Write down the id");
-        String listId = scanner.next();
+        int listId =validation.getValidatedInt("Which waiting list do you choose? Write down the id");
         App.getController().addChildToWaitingList(childId, listId);
         System.out.println(App.getController().getWaitingLists());
     }

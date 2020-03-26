@@ -1,17 +1,20 @@
 package model;
 
+import controller.Controller;
+import main.App;
+
+import javax.xml.crypto.Data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class WorkSchedule{
+public class WorkSchedule {
 
     //  Fields
     private int id;
     private int employeeId;
     private ArrayList<Integer> shiftIds;
-
 
     //  Constructors
     public WorkSchedule() {}
@@ -63,6 +66,12 @@ public class WorkSchedule{
     }
 
     public void toStringConsole() {
-        System.out.printf("%-5d%-15d%-15s%n",id, employeeId, shiftIds);
+
+        System.out.printf("%-5d%-15d%-15s",id, employeeId, shiftIds);
+        for(int i = 0; i < shiftIds.size(); i++) {
+            App.getController().getShift().get(shiftIds.get(i)).toStringConsole();
+            System.out.printf("%-35s"," ");
+        }
+        System.out.println();
     }
 }

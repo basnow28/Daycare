@@ -6,6 +6,7 @@ import java.util.Date;
 public class Shift{
 
     //  Fields
+    private int id;
     private String startTime;
     private String endTime;
     private ShiftType shiftType;
@@ -15,7 +16,8 @@ public class Shift{
     //  Constructors
     public Shift() {}
 
-    public Shift(String startTime, String endTime, ShiftType shiftType, EmployeeType employeeType, Date date) {
+    public Shift(int id, String startTime, String endTime, ShiftType shiftType, EmployeeType employeeType, Date date) {
+        this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.shiftType = shiftType;
@@ -24,6 +26,14 @@ public class Shift{
     }
 
     //  Getters & Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getStartTime() {
         return startTime;
     }
@@ -70,10 +80,13 @@ public class Shift{
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MMMM-yyyy");
         String dateString = formatter.format(date);
-        return String.join(" ", startTime, endTime, shiftType.name(), employeeType.name(), dateString);
+        return String.join(" ",Integer.toString(id), startTime, endTime, shiftType.name(), employeeType.name(),
+                dateString);
     }   //only used to print back to file
 
     public void toStringConsole() {
-        //System.out.printf("");  -  formatted printing
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMMM-yyyy");
+        String dateString = formatter.format(date);
+        System.out.printf("%-15d%-15s%-15s%-15s%-15s%-15s%n",id, startTime, endTime, shiftType, employeeType, dateString);
     }   //used to print to console
 }

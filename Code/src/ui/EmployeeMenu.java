@@ -117,6 +117,7 @@ public class EmployeeMenu{
         } while (!choice.equals("3") && !updated);
     }
 
+
     public static void updateEmployeeMenu()  throws IOException, InterruptedException   {
         System.out.println("Type the <ID> of the employee you want to modify ");
         int toUpdate = console.nextInt();

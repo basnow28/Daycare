@@ -125,6 +125,7 @@ public class FileManagement {
         BufferedReader br = new BufferedReader(new FileReader(fileName));
 
         String line = "", startTime, endTime;
+        int id;
         ShiftType shiftType;
         EmployeeType employeeType;
         Date date;
@@ -134,13 +135,14 @@ public class FileManagement {
             String[] split = line.split("\\s+");
 
             //SHIFT
-            startTime = split[0];
-            endTime = split[1];
-            shiftType = ShiftType.valueOf(split[2]);
-            employeeType = EmployeeType.valueOf(split[3]);
-            date = formatter.parse(split[4]);
+            id = Integer.parseInt(split[0]);
+            startTime = split[1];
+            endTime = split[2];
+            shiftType = ShiftType.valueOf(split[3]);
+            employeeType = EmployeeType.valueOf(split[4]);
+            date = formatter.parse(split[5]);
 
-            Shift shift = new Shift(startTime, endTime, shiftType,employeeType,date);
+            Shift shift = new Shift(id,startTime,endTime,shiftType,employeeType,date);
             shifts.add(shift);
         }
     }
@@ -209,11 +211,11 @@ public class FileManagement {
                 output.write(currentLine);
             }
         }
+        inputFile.setWritable(true);
+        tempFile.renameTo(inputFile);
+        inputFile.delete();
         output.close();
         input.close();
-        final boolean WRITABLE = inputFile.setWritable(true);
-        boolean delete = inputFile.delete();
-        boolean successful = tempFile.renameTo(inputFile);
     }
 
     public void addNewLineToFile(String line, int arraySize, String fileName) throws IOException{
