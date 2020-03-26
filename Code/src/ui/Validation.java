@@ -122,6 +122,20 @@ public class Validation {
     public String getValidatedEmployeeType(String s) {
         return "";
     }
+
+    public String getValidatedAnswer(String message) {
+        System.out.println(message);
+        String answer = scanner.nextLine();
+        if(!isNotYesOrNO(answer)) {
+            return answer;
+        }
+        return getValidatedAnswer("Wrong input. Type \\\"Y/YES\\\" or \\\"N/NO\\\"\"");
+    }
+
+    public boolean isNotYesOrNO(String input) {
+        return !(input.equalsIgnoreCase("N") || input.equalsIgnoreCase("NO") ||
+                input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("YES"));
+    }
 }
 
 
