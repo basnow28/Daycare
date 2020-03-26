@@ -5,18 +5,18 @@ import java.io.IOException;
 import main.App;
 import model.*;
 import ui.Validation;
-import java.util.*;
+
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Controller {
-    //  Fields
+    //  Instantiate Objects
     private static Database database;
     private static FileManagement fm;
     private static Scanner scanner = new Scanner(System.in);
     private static Validation validation = new Validation();
+
     private final String CHILDREN_FILE, PARENTS_FILE, EMPLOYEES_FILE, SHIFTS_FILE, WORK_SCHEDULES_FILE, WAITING_LISTS_FILE;
 
     {
@@ -40,7 +40,6 @@ public class Controller {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-        System.out.println(database.getList(1).toStringConsole());
     }
 
     public int createChild(String firstName, String lastName, int age, String cpr){
@@ -194,14 +193,27 @@ public class Controller {
     }
 
     public void displayShifts() {
-        for(int i = 0; i < database.getShifts().size(); i++) {
-            System.out.println(database.getShifts().get(i));
+        System.out.println("Shifts");
+
+        System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%n","Shift ID", "Start Time",
+                "EndTime", "ShiftType", "EmployeeType", "Date");
+        System.out.println("--------------------------------------------------------------------------");
+
+        for (int i=0; i < database.getShifts().size(); i++) {
+            database.getShifts().get(i).toStringConsole();
         }
     }
 
     public void displayWorkSchedule() {
-        for(int i = 0; i < database.getWorkSchedules().size(); i++) {
-            System.out.println(database.getWorkSchedules().get(i));
+        System.out.println("Work Schedules");
+
+        System.out.printf("%-5s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n","ID","Employee ID", "Shift Ids",
+                "Shift ID", "Start Time", "EndTime", "ShiftType", "EmployeeType", "Date");
+        System.out.println("-----------------------------------------------------------------------------" +
+                "-------------------------------------------------");
+
+        for (int i=0; i < database.getWorkSchedules().size(); i++) {
+            database.getWorkSchedules().get(i).toStringConsole();
         }
     }
 
@@ -210,13 +222,116 @@ public class Controller {
 
         System.out.println("In order to create a new work schedule please enter the following:");
 
-        workSchedule.setId(database.getWorkSchedules().size());
+        workSchedule.setId(database.getWorkSchedules().size());   //the next id is the current size of the ArrayList
 
         workSchedule.setEmployeeId(validation.getValidatedInt("Employee ID"));
 
         workSchedule.setShiftIds(validation.getValidatedIds("Shift IDs"));
 
         database.getWorkSchedules().add(workSchedule);
+
+        try {
+            fm.addNewLineToFile(workSchedule.toString(), database.getWorkSchedules().size(), "workSchedules.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Boolean searchWorkSchedule() throws InterruptedException {
+
+        String input = scanner.nextLine();
+        System.out.println();
+
+        boolean ok_object = false, ok_headline = false;
+
+        for(WorkSchedule ws : database.getWorkSchedules()) {
+
+            if (ws.getEmployeeId() == (Integer.parseInt(input)))  {
+
+                ok_object = true;
+
+                if(!ok_headline)  {
+                    System.out.printf("%-5s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%-15s%n","ID","Employee ID", "Shift Ids",
+                            "Shift ID", "Start Time", "EndTime", "ShiftType", "EmployeeType", "Date");
+                    System.out.println("-----------------------------------------------------------------------------" +
+                            "-------------------------------------------------");
+                    ok_headline = true;
+                }
+                ws.toStringConsole();
+            }
+        }
+
+        System.out.println();
+
+        if(!ok_object)  {
+            System.out.println("The Work Schedule hasn't been found");
+            Thread.sleep(1000);
+            return false;
+        }
+        return true;
+    }
+
+    public void updateWorkSchedule(int id, String field) {
+        String oldLine = database.getWorkSchedules().get(id).toString();
+
+        switch(field) {
+            case "employeeId":
+                database.getWorkSchedules().get(id).setEmployeeId(validation.getValidatedInt("Choose a new <Employee ID>"));
+                break;
+
+            case "shiftIds":
+                database.getWorkSchedules().get(id).setShiftIds(validation.getValidatedIds("Choose the new <Shift IDs>"));
+                break;
+
+            case "everything":
+                database.getWorkSchedules().get(id).setEmployeeId(validation.getValidatedInt("Choose a new <Employee ID>"));
+                database.getWorkSchedules().get(id).setShiftIds(validation.getValidatedIds("Choose the new <Shift IDs>"));
+                break;
+
+            default:
+                System.out.println("Wrong field");
+        }
+
+        String newLine = database.getWorkSchedules().get(id).toString();
+
+        try {
+            fm.modifyFile(oldLine,newLine,"workSchedules.txt",database.getWorkSchedules());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean deleteWorkSchedule() throws InterruptedException, IOException {
+//        int toDelete = whereInsideStaffTempArray();
+//        int remember = chooseStaff(toDelete);
+        int toDelete = validation.getValidatedInt("Type the <ID> of the Work Schedule you want to delete");
+
+        String firstName = database.getEmployees().get(database.getWorkSchedules().get(toDelete).getEmployeeId()).getFirstName();
+        //the first name of the employee that is to be deleted
+        String lastName = database.getEmployees().get(database.getWorkSchedules().get(toDelete).getEmployeeId()).getLastName();
+        //the last name of the employee that is to be deleted
+
+        System.out.println();
+        System.out.println("Are you sure you want to delete <" + firstName + " " + lastName + ">'s Work Schedule ? " +
+                "(Type \"Y/YES\" or \"N/NO\")");
+
+        String answer = validation.getValidatedAnswer("");
+
+        if(answer.equalsIgnoreCase("YES") || answer.equalsIgnoreCase("Y"))   {
+            fm.deleteFromFile(database.getWorkSchedules().get(toDelete).toString(),"workSchedules.txt",database.getWorkSchedules());
+            //Delete from file
+            database.getWorkSchedules().remove(toDelete);   //Delete from array
+            System.out.println("The Work Schedule has been deleted");
+            Thread.sleep(1000);
+
+            return false;
+        }  else  {
+            return true;
+        }
+    }
+
+    public ArrayList<Shift> getShift() {
+        return database.getShifts();
     }
 
     public int createEmployee(String firstName, String lastName, String cpr, String email, String phoneNumber, EmployeeType type, double salary, int workingHours) {
@@ -262,4 +377,13 @@ public class Controller {
         choice = scanner.nextInt();
         employees.remove(choice);
     }
+
+    public void debug() {
+        try {
+            fm.modifyFile(database.getWorkSchedules().get(0).toString(),"0  3  [0, 1]",
+                    "workSchedules.txt",database.getWorkSchedules());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }   //it was a hell of an adventure, testing purposes, keep it here for now pls
 }

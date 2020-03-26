@@ -1,17 +1,20 @@
 package model;
 
+import controller.Controller;
+import main.App;
+
+import javax.xml.crypto.Data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class WorkSchedule{
+public class WorkSchedule {
 
     //  Fields
     private int id;
     private int employeeId;
     private ArrayList<Integer> shiftIds;
-
 
     //  Constructors
     public WorkSchedule() {}
@@ -25,7 +28,7 @@ public class WorkSchedule{
     public WorkSchedule(int id, int employeeId, String shiftIds) throws ParseException {
         this(id,employeeId);
 
-        String[] ids = shiftIds.replaceAll("[\\[\\] ]", "").split(",");
+        String[] ids = shiftIds.replaceAll("\\[|\\]| ", "").split(",");
 
         for (int i = 0; i < ids.length; i++) {
             this.shiftIds.add(Integer.parseInt(ids[i]));
@@ -59,6 +62,16 @@ public class WorkSchedule{
 
     //  Printing
     public String toString() {
-        return id + " " + employeeId + " " + shiftIds.toString();
+        return id + "  " + employeeId + "  " + shiftIds.toString();
+    }
+
+    public void toStringConsole() {
+
+        System.out.printf("%-5d%-15d%-15s",id, employeeId, shiftIds);
+        for(int i = 0; i < shiftIds.size(); i++) {
+            App.getController().getShift().get(shiftIds.get(i)).toStringConsole();
+            System.out.printf("%-35s"," ");
+        }
+        System.out.println();
     }
 }

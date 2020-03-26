@@ -21,7 +21,7 @@ public class App {
 
     private static Controller controller;
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws IOException, InterruptedException {
         controller = new Controller();
         new MainMenu();
     }
