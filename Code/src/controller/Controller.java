@@ -85,6 +85,7 @@ public class Controller {
         }
     }
 
+    // WORK SCHEDULE //
     public void displayWorkSchedule() {
         for(int i = 0; i < database.getWorkSchedules().size(); i++) {
             System.out.println(database.getWorkSchedules().get(i));
@@ -173,53 +174,137 @@ public class Controller {
         }
 
     }
-
-    public int createEmployee(String firstName, String lastName, String cpr, String email, String phoneNumber, EmployeeType type, double salary, int workingHours) {
-        int id = database.getEmployees().size();
-        database.getEmployees().add(new Employee(id, firstName, lastName, cpr, email, phoneNumber, type, salary,workingHours));
-        return id;
-    }
-
-    public void updateEmployee() {
-        int choice = -1;
-        System.out.println("Enter the employee ID of the employee you wish to update:");
-        choice = scanner.nextInt();
-        Employee e = new Employee();
-        System.out.println("Enter the new first name of the employee:");
-        String firstName = validation.getValidatedName(scanner.next());
-        e.setFirstName(firstName);
-        System.out.println("Enter the new last name o the employee:");
-        String lastName = validation.getValidatedName(scanner.next());
-        e.setLastName(lastName);
-        System.out.println("Enter the new CPR of the employee:");
-        String cpr = validation.getValidateCpr(scanner.next());
-        e.setCpr(cpr);
-        System.out.println("Enter the new email of the employee:");
-        String email = validation.getValidatedEmail(scanner.next());
-        e.setEmail(email);
-        System.out.println("Enter the new phone number of the employee:");
-        String phoneNumber = validation.getValidatedPhone(scanner.next());
-        e.setPhoneNumber(phoneNumber);
-        System.out.println("Enter the new type of employee:");
-        //EmployeeType type = new EmployeeType();
-        //e.setType(type);
-        System.out.println("Enter the new salary of the employee:");
-        double salary = scanner.nextDouble();
-        e.setSalary(salary);
-        System.out.println("Enter the new number of work hours of the employee:");
-        int workingHours = scanner.nextInt();
-        e.setWorkingHours(workingHours);
-    }
-
-    public void removeEmployee(ArrayList<Employee> employees, int index) {
-        int choice = -1;
-        System.out.println("Enter the employee ID of the employee you wish to remove:");
-        choice = scanner.nextInt();
-        employees.remove(choice);
-    }
-
     public boolean deleteWorkSchedule() {
         return false;
+    }
+
+
+    // EMPLOYEE //
+    public void createEmployee() {
+        Employee employee = new Employee();
+        System.out.println("In order to create a new employee, please enter the following:");
+
+        employee.setId(database.getEmployees().size());
+
+        employee.setFirstName(validation.getValidatedName("Employee's first name:"));
+
+        employee.setLastName(validation.getValidatedName("Employee's last name"));
+
+        employee.setCpr(validation.getValidateCpr("Employee's CPR:"));
+
+        employee.setEmail(validation.getValidatedEmail("Employee's email:"));
+
+        employee.setPhoneNumber(validation.getValidatedPhone("Employee's phone number:"));
+
+       // employee.setType(validation.getValidatedEmployeeType("Employee's job type:"));
+
+        employee.setSalary(validation.getValidatedDouble("Employee's salary:"));
+
+        employee.setWorkingHours(validation.getValidatedInt("Employee's number of work hours:"));
+
+        database.getEmployees().add(employee);
+    }
+
+    public void displayEmployees() {
+        for(int i = 0; i < database.getEmployees().size(); i++) {
+            System.out.println(database.getEmployees().get(i));
+        }
+    }
+
+    public void updateEmployee(int id, String field) {
+        String oldLine = database.getEmployees().get(id).toString();
+
+        switch(field) {
+            case "firstName":
+                database.getEmployees().get(id).setFirstName(validation.getValidatedName("Choose a new <Employee first name>"));
+                break;
+
+            case "lastName":
+                database.getEmployees().get(id).setLastName(validation.getValidatedName("Choose a new <Employee last name>"));
+                break;
+
+            case "cpr":
+                database.getEmployees().get(id).setCpr(validation.getValidateCpr("Choose a new <Employee CPR>"));
+                break;
+
+            case "email":
+                database.getEmployees().get(id).setEmail(validation.getValidatedEmail("Choose a new <Employee email>"));
+                break;
+
+            case "phoneNumber":
+                database.getEmployees().get(id).setPhoneNumber(validation.getValidatedPhone("Choose a new <Employee phone number>"));
+                break;
+
+            case "type":
+              //  database.getEmployees().get(id).setType(validation.getValidatedEmployeeType("Choose a new <Employee job type>"));
+                break;
+
+            case "salary":
+                database.getEmployees().get(id).setSalary(validation.getValidatedDouble("Choose a new <Employee salary>"));
+                break;
+
+            case "workingHours":
+                database.getEmployees().get(id).setWorkingHours(validation.getValidatedInt("Choose a new <Employee work hours>"));
+                break;
+
+            case "everything":
+                database.getEmployees().get(id).setFirstName(validation.getValidatedName("Choose a new <Employee first name>"));
+                database.getEmployees().get(id).setLastName(validation.getValidatedName("Choose a new <Employee last name>"));
+                database.getEmployees().get(id).setCpr(validation.getValidateCpr("Choose a new <Employee CPR>"));
+                database.getEmployees().get(id).setEmail(validation.getValidatedEmail("Choose a new <Employee email>"));
+                database.getEmployees().get(id).setPhoneNumber(validation.getValidatedPhone("Choose a new <Employee phone number>"));
+                //  database.getEmployees().get(id).setType(validation.getValidatedEmployeeType("Choose a new <Employee job type>"));
+                database.getEmployees().get(id).setSalary(validation.getValidatedDouble("Choose a new <Employee salary>"));
+                database.getEmployees().get(id).setWorkingHours(validation.getValidatedInt("Choose a new <Employee work hours>"));
+                break;
+
+            default:
+                System.out.println("Wrong field");
+        }
+        String newLine = database.getEmployees().get(id).toString();
+        try {
+            fm.modifyFile(oldLine,newLine,"employees.txt",database.getEmployees());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Boolean removeEmployee() {
+        int index = validation.getValidatedInt("Employee's ID you wish to remove:");
+        database.getEmployees().remove(index);
+        return true;
+    }
+
+// try tomorrow after menu changes
+    public  Boolean searchEmployee() throws InterruptedException {
+        String input = scanner.nextLine();
+        System.out.println();
+
+        boolean ok_object = false, ok_headline = false;
+
+        for(Employee e : database.getEmployees()) {
+
+            if (e.getId() == (Integer.parseInt(input)))  {
+
+                ok_object = true;
+
+                if(!ok_headline)  {
+                    System.out.printf("%-5s%-15s%-15s%n","ID","Employee ID", "Shift Ids");
+                    System.out.println("----------------------------------------------------");
+                    ok_headline = true;
+                }
+                e.toStringConsole();
+            }
+        }
+
+        System.out.println();
+
+        if(!ok_object)  {
+            System.out.println("The staff member hasn't been found");
+            Thread.sleep(1000);
+            return false;
+        }
+        return true;
     }
 
     public void debug() {

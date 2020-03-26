@@ -1,5 +1,7 @@
 package ui;
 
+import model.EmployeeType;
+
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,6 +13,12 @@ public class Validation {
 
     private boolean validateInt(String number) {
         Pattern pattern =  Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(number);
+        return matcher.matches();
+    }
+
+    private boolean validateDouble(String number) {
+        Pattern pattern = Pattern.compile("\\d+(\\.\\d+)");
         Matcher matcher = pattern.matcher(number);
         return matcher.matches();
     }
@@ -52,6 +60,15 @@ public class Validation {
             return Integer.parseInt(number);
         }
         return getValidatedInt("Invalid input. ID cannot contain any characters other than figures");
+    }
+
+    public double getValidatedDouble(String message) {
+        System.out.println(message);
+        String number = scanner.nextLine();
+        if (this.validateDouble(number)) {
+            return Double.parseDouble(number);
+        }
+        return getValidatedDouble("Invalid input. Salary cannot contains any characters other than figures.");
     }
 
     public ArrayList<Integer> getValidatedIds (String message) {
@@ -119,8 +136,15 @@ public class Validation {
         return getValidatedEmail(message);
     }
 
-    public String getValidatedEmployeeType(String s) {
-        return "";
+    public String getValidatedEmployeeType(String message) {
+        System.out.println(message);
+        String type = scanner.next();
+        if (type.equalsIgnoreCase("NURSE") || type.equalsIgnoreCase("TEACHER")
+                || type.equalsIgnoreCase("ADMINISTRATOR")) {
+            return type;
+        }
+        System.out.println("Invalid type of job. Job must be NURSE, TEACHER or ADMINISTRATOR.");
+        return getValidatedEmployeeType(message);
     }
 }
 
