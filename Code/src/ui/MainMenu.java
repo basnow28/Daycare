@@ -40,7 +40,7 @@ public class MainMenu {
 
 
 
-    public static void mainMenuAdmin() throws InterruptedException, IOException {
+    public static void mainMenuAdmin(){
         String choice = "-1";
         do {
             displayMainMenuAdmin();

@@ -55,7 +55,7 @@ public class Controller {
         }
     }
 
-    public Boolean searchChildren() throws InterruptedException {
+    public Boolean searchChildren(){
 
         String input = scanner.nextLine();
         System.out.println();
@@ -81,7 +81,11 @@ public class Controller {
 
         if(!ok_object)  {
             System.out.println("The child hasn't been found");
-            Thread.sleep(1000);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return false;
         }
         return true;
@@ -103,7 +107,7 @@ public class Controller {
                 database.getChildren().get(id).setAge(validation.getValidatedAge("Choose new Age"));
                 break;
             case "cpr":
-                database.getChildren().get(id).setCpr(validation.getValidateCpr("Choose new CPR"));
+                database.getChildren().get(id).setCpr(validation.getValidatedCpr("Choose new CPR"));
                 break;
             case "parentId":
                 database.getChildren().get(id).setParentId(validation.getValidatedInt("Choose new Parent ID"));
@@ -112,7 +116,7 @@ public class Controller {
                 database.getChildren().get(id).setFirstName(validation.getValidatedName("Choose a new First Name"));
                 database.getChildren().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
                 database.getChildren().get(id).setAge(validation.getValidatedAge("Choose new Age"));
-                database.getChildren().get(id).setCpr(validation.getValidateCpr("Choose new CPR"));
+                database.getChildren().get(id).setCpr(validation.getValidatedCpr("Choose new CPR"));
                 database.getChildren().get(id).setParentId(validation.getValidatedInt("Choose new Parent ID"));
                 break;
 
@@ -160,7 +164,7 @@ public class Controller {
         }
     }
 
-    public Boolean searchParents() throws InterruptedException {
+    public Boolean searchParents(){
 
         String input = scanner.nextLine();
         System.out.println();
@@ -186,7 +190,11 @@ public class Controller {
 
         if(!ok_object)  {
             System.out.println("The child hasn't been found");
-            Thread.sleep(1000);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return false;
         }
         return true;
@@ -205,7 +213,7 @@ public class Controller {
                 database.getParents().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
                 break;
             case "cpr":
-                database.getParents().get(id).setCpr(validation.getValidateCpr("Choose new CPR"));
+                database.getParents().get(id).setCpr(validation.getValidatedCpr("Choose new CPR"));
                 break;
             case "email":
                 database.getParents().get(id).setEmail(validation.getValidatedEmail("Choose new Email"));
@@ -219,7 +227,7 @@ public class Controller {
             case "everything":
                 database.getParents().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
                 database.getParents().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
-                database.getParents().get(id).setCpr(validation.getValidateCpr("Choose new CPR"));
+                database.getParents().get(id).setCpr(validation.getValidatedCpr("Choose new CPR"));
                 database.getParents().get(id).setEmail(validation.getValidatedEmail("Choose new Email"));
                 database.getParents().get(id).setPhoneNumber(validation.getValidatedPhone("Choose new Phone Number"));
                 database.getParents().get(id).setChildId(validation.getValidatedInt("Choose new Child ID"));
@@ -414,7 +422,7 @@ public class Controller {
         }
     }
 
-    public Boolean searchWorkSchedule() throws InterruptedException {
+    public Boolean searchWorkSchedule(){
 
         String input = scanner.nextLine();
         System.out.println();
@@ -442,7 +450,11 @@ public class Controller {
 
         if(!ok_object)  {
             System.out.println("The Work Schedule hasn't been found");
-            Thread.sleep(1000);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return false;
         }
         return true;
@@ -478,7 +490,7 @@ public class Controller {
         }
     }
 
-    public boolean deleteWorkSchedule() throws InterruptedException, IOException {
+    public boolean deleteWorkSchedule(){
 //        int toDelete = whereInsideStaffTempArray();
 //        int remember = chooseStaff(toDelete);
         int toDelete = validation.getValidatedInt("Type the <ID> of the Work Schedule you want to delete");
@@ -495,11 +507,19 @@ public class Controller {
         String answer = validation.getValidatedAnswer("");
 
         if(answer.equalsIgnoreCase("YES") || answer.equalsIgnoreCase("Y"))   {
-            fm.deleteFromFile(database.getWorkSchedules().get(toDelete).toString(),"workSchedules.txt",database.getWorkSchedules());
+            try {
+                fm.deleteFromFile(database.getWorkSchedules().get(toDelete).toString(),"workSchedules.txt",database.getWorkSchedules());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             //Delete from file
             database.getWorkSchedules().remove(toDelete);   //Delete from array
             System.out.println("The Work Schedule has been deleted");
-            Thread.sleep(1000);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             return false;
         }  else  {
@@ -509,9 +529,6 @@ public class Controller {
 
     public ArrayList<Shift> getShift() {
         return database.getShifts();
-    }
-    public boolean deleteWorkSchedule() {
-        return false;
     }
 
 
@@ -526,7 +543,7 @@ public class Controller {
 
         employee.setLastName(validation.getValidatedName("Employee's last name"));
 
-        employee.setCpr(validation.getValidateCpr("Employee's CPR:"));
+        employee.setCpr(validation.getValidatedCpr("Employee's CPR:"));
 
         employee.setEmail(validation.getValidatedEmail("Employee's email:"));
 
@@ -561,7 +578,7 @@ public class Controller {
                 break;
 
             case "cpr":
-                database.getEmployees().get(id).setCpr(validation.getValidateCpr("Choose a new <Employee CPR>"));
+                database.getEmployees().get(id).setCpr(validation.getValidatedCpr("Choose a new <Employee CPR>"));
                 break;
 
             case "email":
@@ -587,7 +604,7 @@ public class Controller {
             case "everything":
                 database.getEmployees().get(id).setFirstName(validation.getValidatedName("Choose a new <Employee first name>"));
                 database.getEmployees().get(id).setLastName(validation.getValidatedName("Choose a new <Employee last name>"));
-                database.getEmployees().get(id).setCpr(validation.getValidateCpr("Choose a new <Employee CPR>"));
+                database.getEmployees().get(id).setCpr(validation.getValidatedCpr("Choose a new <Employee CPR>"));
                 database.getEmployees().get(id).setEmail(validation.getValidatedEmail("Choose a new <Employee email>"));
                 database.getEmployees().get(id).setPhoneNumber(validation.getValidatedPhone("Choose a new <Employee phone number>"));
                 //  database.getEmployees().get(id).setType(validation.getValidatedEmployeeType("Choose a new <Employee job type>"));
@@ -613,7 +630,7 @@ public class Controller {
     }
 
 // try tomorrow after menu changes
-    public  Boolean searchEmployee() throws InterruptedException {
+    public  Boolean searchEmployee() {
         String input = scanner.nextLine();
         System.out.println();
 
@@ -638,7 +655,11 @@ public class Controller {
 
         if(!ok_object)  {
             System.out.println("The staff member hasn't been found");
-            Thread.sleep(1000);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return false;
         }
         return true;

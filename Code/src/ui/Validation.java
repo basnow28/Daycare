@@ -156,6 +156,7 @@ public class Validation {
         }
         System.out.println("Invalid type of job. Job must be NURSE, TEACHER or ADMINISTRATOR.");
         return getValidatedEmployeeType(message);
+    }
 
     public Quarter getValidatedQuarter(String message){
         System.out.println(message);

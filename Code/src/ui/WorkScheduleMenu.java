@@ -29,7 +29,7 @@ public class WorkScheduleMenu{
         System.out.println("[3] Back to Work Schedule Menu");
     }
 
-    public static void workScheduleMenu() throws InterruptedException, IOException {
+    public static void workScheduleMenu() {
         String choice = "-1";
         do {
             displayWorkScheduleMenu();
@@ -60,12 +60,16 @@ public class WorkScheduleMenu{
                     MainMenu.printEmptyLines();
                     System.out.println("Choice must be a value between \"1\" and \"4\".");
                     MainMenu.printEmptyLines();
-                    Thread.sleep(1000);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
             }
         } while (!choice.equals("4"));
     }
 
-    public static void searchWorkScheduleMenu() throws IOException, InterruptedException {
+    public static void searchWorkScheduleMenu(){
         String choice = "-1";
         boolean repeat = true;
         boolean updated = false;
@@ -88,7 +92,11 @@ public class WorkScheduleMenu{
 
             displaySearchWorkScheduleMenuOptions();
 
-            choice = br.readLine();
+            try {
+                choice = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             switch (choice) {
                 case "1":
@@ -111,12 +119,16 @@ public class WorkScheduleMenu{
                     MainMenu.printEmptyLines();
                     System.out.println("Choice must be a value between \"1\" and \"3\".");
                     MainMenu.printEmptyLines();
-                    Thread.sleep(1000);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
             }
         } while (!choice.equals("3") && !updated);
     }
 
-    public static void updateWorkScheduleMenu()  throws IOException, InterruptedException   {
+    public static void updateWorkScheduleMenu(){
         System.out.println("Type the <ID> of the Work Schedule you want to modify ");
         int toUpdate = console.nextInt();
 
@@ -129,7 +141,11 @@ public class WorkScheduleMenu{
             System.out.println("[3] Everything");
             System.out.println("[4] Go back");
 
-            choice = br.readLine();
+            try {
+                choice = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             switch(choice) {
                 case "1":
 
@@ -159,7 +175,11 @@ public class WorkScheduleMenu{
                     MainMenu.printEmptyLines();
                     System.out.println("Choice must be a value between \"1\" and \"4\".");
                     MainMenu.printEmptyLines();
-                    Thread.sleep(1000);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
             }
         }  while(!choice.equals("4"));
     }

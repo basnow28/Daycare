@@ -29,7 +29,7 @@ public class EmployeeMenu{
         System.out.println("[3] Exit");
     }
 
-    public static void employeeMenu() throws InterruptedException, IOException {
+    public static void employeeMenu(){
         String choice = "-1";
         do {
             displayEmployeeMenu();
@@ -60,12 +60,16 @@ public class EmployeeMenu{
                     MainMenu.printEmptyLines();
                     System.out.println("Choice must be a value between \"1\" and \"4\".");
                     MainMenu.printEmptyLines();
-                    Thread.sleep(1000);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
             }
         } while (!choice.equals("4"));
     }
 
-    public static void searchEmployeeMenu() throws IOException, InterruptedException {
+    public static void searchEmployeeMenu(){
         String choice = "-1";
         boolean repeat = true;
         boolean updated = false;
@@ -88,7 +92,11 @@ public class EmployeeMenu{
 
           displaySearchEmployeeMenu();
 
-            choice = br.readLine();
+            try {
+                choice = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
             switch (choice) {
@@ -112,13 +120,17 @@ public class EmployeeMenu{
                     MainMenu.printEmptyLines();
                     System.out.println("Choice must be a value between \"1\" and \"3\".");
                     MainMenu.printEmptyLines();
-                    Thread.sleep(1000);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
             }
         } while (!choice.equals("3") && !updated);
     }
 
 
-    public static void updateEmployeeMenu()  throws IOException, InterruptedException   {
+    public static void updateEmployeeMenu(){
         System.out.println("Type the <ID> of the employee you want to modify ");
         int toUpdate = console.nextInt();
 
@@ -137,7 +149,11 @@ public class EmployeeMenu{
             System.out.println("[9] Everything");
             System.out.println("[10] Go back");
 
-            choice = br.readLine();
+            try {
+                choice = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             switch(choice) {
                 case "1":
 
@@ -209,7 +225,11 @@ public class EmployeeMenu{
                     MainMenu.printEmptyLines();
                     System.out.println("Choice must be a value between \"1\" and \"10\".");
                     MainMenu.printEmptyLines();
-                    Thread.sleep(1000);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
             }
         }  while(!choice.equals("10"));
     }
