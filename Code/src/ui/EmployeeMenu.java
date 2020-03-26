@@ -84,7 +84,7 @@ public class EmployeeMenu{
     private static void createEmployee(int employeeId){
         String firstName = validation.getValidatedName("Employee's first name?");
         String lastName = validation.getValidatedName("Employee's last name?");
-        String cpr = validation.getValidateCpr("Employee's cpr number?");
+        String cpr = validation.getValidatedCpr("Employee's cpr number?");
         String email = validation.getValidatedEmail("Employee's email?");
         String phoneNumber = validation.getValidatedPhone("Employee's phone number?");
         String type = validation.getValidatedEmployeeType("");

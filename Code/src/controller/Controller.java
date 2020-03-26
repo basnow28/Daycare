@@ -1,6 +1,8 @@
 package controller;
 import fileManagement.FileManagement;
 import java.io.IOException;
+
+import main.App;
 import model.*;
 import ui.Validation;
 
@@ -15,6 +17,17 @@ public class Controller {
     private static Scanner scanner = new Scanner(System.in);
     private static Validation validation = new Validation();
 
+    private final String CHILDREN_FILE, PARENTS_FILE, EMPLOYEES_FILE, SHIFTS_FILE, WORK_SCHEDULES_FILE, WAITING_LISTS_FILE;
+
+    {
+        CHILDREN_FILE = "children.txt";
+        PARENTS_FILE = "parents.txt";
+        EMPLOYEES_FILE = "employees.txt";
+        SHIFTS_FILE = "shifts.txt";
+        WORK_SCHEDULES_FILE = "workSchedules.txt";
+        WAITING_LISTS_FILE = "waitingLists.txt";
+    }
+
     //  Constructors
     public Controller() {
         database = new Database();
@@ -22,8 +35,8 @@ public class Controller {
 
         try {
             fm.inputFromFile(database.getChildren(), database.getParents(), database.getEmployees(), database.getShifts(),
-                    database.getWorkSchedules(),database.getWaitingLists(), "children.txt", "parents.txt",
-                    "employees.txt", "shifts.txt", "workSchedules.txt", "waitingLists.txt");
+                    database.getWorkSchedules(),database.getWaitingLists(), CHILDREN_FILE, PARENTS_FILE,
+                    EMPLOYEES_FILE, SHIFTS_FILE, WORK_SCHEDULES_FILE, WAITING_LISTS_FILE);
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
@@ -42,12 +55,11 @@ public class Controller {
         Parent parent = new Parent(id, firstName, lastName,cpr, email, phoneNumber, childId );
         database.getParents().add(parent);
         try {
-            fm.addNewLineToFile(database.getChildren().get(childId).toStringConsole(), database.getChildren().size(), "children.txt");
-            fm.addNewLineToFile(parent.toStringConsole(), database.getParents().size(), "parents.txt");
+            fm.addNewLineToFile(database.getChildren().get(childId).toStringConsole(), database.getChildren().size(), CHILDREN_FILE);
+            fm.addNewLineToFile(parent.toStringConsole(), database.getParents().size(), PARENTS_FILE);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public WaitingList getCurrentList(){
@@ -69,13 +81,115 @@ public class Controller {
         return children;
     }
 
+    public void displayChildrenFromList(int id){
+        if(getChildrenFromList(id).size() == 0 ){
+            System.out.println("List is empty");
+        }else{
+        for(Child child : getChildrenFromList(id)){
+            System.out.println(child.toString());
+        }}
+    }
+
     public ArrayList<WaitingList> getWaitingLists(){
         return database.getWaitingLists();
     }
 
-    public void addChildToWaitingList(int childId, String listId) {
-        database.getList(Integer.parseInt(listId)).addChild(childId);
-        //database.getParents().add(new Parent(id, firstName, lastName, cpr, email, phoneNumber, childId ));
+    public void addChildToWaitingList(int childId, int listId) {
+        String oldLine = database.getList(listId).toStringConsole();
+        database.getList(listId).addChild(childId);
+        String newLine = database.getList(listId).toStringConsole();
+        System.out.println(oldLine);
+        System.out.println(newLine);
+        try {
+            fm.modifyFile(oldLine, newLine, WAITING_LISTS_FILE, database.getWaitingLists());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void createNewWaitingList(Quarter quarter, String year, int capacity) {
+        WaitingList waitingList = new WaitingList(database.getWaitingLists().size(), quarter, year, capacity);
+        database.getWaitingLists().add(waitingList);
+        try {
+            fm.addNewLineToFile(waitingList.toStringConsole(), database.getWaitingLists().size(), WAITING_LISTS_FILE);
+            System.out.println("Added successfully");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<WaitingList> getWaitingList(String key) {
+        ArrayList<WaitingList> waitingLists = new ArrayList<WaitingList>();
+
+        for(WaitingList waitingList : database.getWaitingLists()){
+            if(key.contains(waitingList.getYear()) || key.contains(waitingList.getQuarter().toString().toLowerCase()) ||
+                    key.contains(waitingList.getQuarter().toString().toUpperCase()) || key.contains(Integer.toString(waitingList.getCapacity()))){
+                waitingLists.add(waitingList);
+            }
+        }
+        for(WaitingList wl : waitingLists){
+            System.out.println(wl.toString());
+            System.out.println("Children: ");
+            displayChildrenFromList(wl.getId());
+            System.out.println();
+        }
+        return waitingLists;
+    }
+
+    public void updateWaitingList(int id, String field) {
+        String oldLine = database.getWaitingLists().get(id).toStringConsole();
+        String newLine;
+        System.out.println(oldLine);
+        switch (field.toLowerCase()) {
+            case "year":
+                String newValue = validation.getValidatedYear("Write new " + field);
+                database.getWaitingLists().get(id).setYear(newValue);
+                break;
+            case "quarter":
+                Quarter newQuarter = validation.getValidatedQuarter("Write new " + field);
+                database.getWaitingLists().get(id).setQuarter(newQuarter);
+                break;
+            case "capacity":
+                int newCapacity = validation.getValidatedInt("Write new " + field);
+                database.getWaitingLists().get(id).setCapacity(newCapacity);
+                break;
+            default:
+                break;
+        }
+        newLine = database.getWaitingLists().get(id).toStringConsole();
+        System.out.println(newLine);
+        try {
+            fm.modifyFile(oldLine, newLine, WAITING_LISTS_FILE, database.getWaitingLists());
+            System.out.println("Updated successfully");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteChildFromList(int listId, int id) {
+        String oldLine = database.getWaitingLists().get(listId).toStringConsole();
+        database.getWaitingLists().get(listId).deleteChild(id);
+        String newLine = database.getWaitingLists().get(listId).toStringConsole();
+
+        try {
+            fm.modifyFile(oldLine, newLine, WAITING_LISTS_FILE, database.getWaitingLists());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String findChildOnAList(String key){
+        String children = "";
+        for(Child child : database.getChildren()){
+            if(child.toString().contains(key))
+            for(WaitingList wl : database.getWaitingLists()){
+                for(int id : wl.getChildrenIds()){
+                    if(child.getId() == id){
+                        children += child.toString() + "\t| LIST:" +wl.getId() + "  " + wl.getYear() + " " + wl.getQuarter() + "\n";
+                    }
+                }
+            }
+        }
+        return children;
     }
 
     public void displayShifts() {
@@ -238,7 +352,7 @@ public class Controller {
         String lastName = validation.getValidatedName(scanner.next());
         e.setLastName(lastName);
         System.out.println("Enter the new CPR of the employee:");
-        String cpr = validation.getValidateCpr(scanner.next());
+        String cpr = validation.getValidatedCpr(scanner.next());
         e.setCpr(cpr);
         System.out.println("Enter the new email of the employee:");
         String email = validation.getValidatedEmail(scanner.next());
