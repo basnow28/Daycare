@@ -106,5 +106,10 @@ public class MainMenu {
         System.out.println();
         System.out.println();
     }
+
+    public static void typeAnyKey(){
+        System.out.println("\nType any key to continue");
+        scanner.next();
+    }
 }
 

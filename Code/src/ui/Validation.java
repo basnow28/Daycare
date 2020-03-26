@@ -1,7 +1,10 @@
 package ui;
 
+import model.Quarter;
+
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,13 +48,21 @@ public class Validation {
         return matcher.matches();
     }
 
+    private boolean validateQuarter(String quarter){
+        for(Quarter quarterValue : Quarter.values()){
+            if(quarter.toUpperCase().equals(quarterValue.toString()))
+                return true;
+        }
+        return false;
+    }
+
     public int getValidatedInt(String message) {
         System.out.println(message);
         String number = scanner.nextLine();
         if(this.validateInt(number)) {
             return Integer.parseInt(number);
         }
-        return getValidatedInt("Invalid input. ID cannot contain any characters other than figures");
+        return getValidatedInt("Invalid input. Cannot contain any characters other than figures");
     }
 
     public ArrayList<Integer> getValidatedIds (String message) {
@@ -79,19 +90,19 @@ public class Validation {
         return getValidatedName(message);
     }
 
-    public String getValidateCpr(String message){
+    public String getValidatedCpr(String message){
         System.out.println(message);
-        String cpr = scanner.next();
+        String cpr = scanner.nextLine();
         if(this.validateCpr(cpr)){
             return cpr;
         }
         System.out.println("Invalid cpr number. Correct format: XXXXXX-XXXX");
-        return getValidateCpr(message);
+        return getValidatedCpr(message);
     }
 
     public int getValidatedAge(String message){
         System.out.println(message);
-        String age = scanner.next();
+        String age = scanner.nextLine();
         if(this.validateAge(age)){
             return Integer.parseInt(age);
         }
@@ -101,7 +112,7 @@ public class Validation {
 
     public String getValidatedEmail(String message) {
         System.out.println(message);
-        String email = scanner.next();
+        String email = scanner.nextLine();
         if(this.validateEmail(email)){
             return email;
         }
@@ -111,7 +122,7 @@ public class Validation {
 
     public String getValidatedPhone(String message) {
         System.out.println(message);
-        String phoneNumber = scanner.next();
+        String phoneNumber = scanner.nextLine();
         if(this.validatePhoneNumber(phoneNumber)){
             return phoneNumber;
         }
@@ -119,8 +130,31 @@ public class Validation {
         return getValidatedEmail(message);
     }
 
+    public Quarter getValidatedQuarter(String message){
+        System.out.println(message);
+        for(Quarter q : Quarter.values())
+            System.out.print(q + " ");
+        System.out.println();
+        String quarter = scanner.nextLine();
+        if(this.validateQuarter(quarter)){
+            return Quarter.valueOf(quarter.toUpperCase());
+        }
+        System.out.println("Invalid quarter. Choose one of the quarters that are displayed");
+        return getValidatedQuarter(message);
+    }
+
     public String getValidatedEmployeeType(String s) {
         return "";
+    }
+
+    public String getValidatedYear(String message) {
+        System.out.println(message);
+        String year = scanner.nextLine();
+        if(Integer.parseInt(year) > 2020 && year.length() == 4){
+            return year;
+        }
+        System.out.println("Invalid year. Year has 4 digits and cannot be the past year");
+        return getValidatedYear(message);
     }
 }
 
