@@ -36,6 +36,98 @@ public class Controller {
         return id;
     }
 
+    public void displayChildren() {
+        for(int i = 0; i < database.getChildren().size(); i++) {
+            System.out.println(database.getChildren().get(i));
+        }
+    }
+
+    public Boolean searchChildren() throws InterruptedException {
+
+        String input = scanner.nextLine();
+        System.out.println();
+
+        boolean ok_object = false, ok_headline = false;
+
+        for(Child ch : database.getChildren()) {
+
+            if (ch.getId() == (Integer.parseInt(input)))  {
+
+                ok_object = true;
+
+                if(!ok_headline)  {
+                    System.out.printf("%-5s%-15s%-15s%-5s%-15s%-15s%n","ID","First Name", "Last Name", "Age", "CPR", "Parent");
+                    System.out.println("----------------------------------------------------------------------------------");
+                    ok_headline = true;
+                }
+                ch.toStringConsoleFormat();
+            }
+        }
+
+        System.out.println();
+
+        if(!ok_object)  {
+            System.out.println("The child hasn't been found");
+            Thread.sleep(1000);
+            return false;
+        }
+        return true;
+    }
+
+    public void updateChild(int id, String field) {
+
+        String oldLine = database.getChildren().get(id).toString();
+
+        switch(field) {
+            case "firstName":
+                database.getChildren().get(id).setFirstName(validation.getValidatedName("Choose a new First Name"));
+                break;
+
+            case "lastName":
+                database.getChildren().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
+                break;
+            case "age":
+                database.getChildren().get(id).setAge(validation.getValidatedAge("Choose new Age"));
+                break;
+            case "cpr":
+                database.getChildren().get(id).setCpr(validation.getValidateCpr("Choose new CPR"));
+                break;
+            case "parentId":
+                database.getChildren().get(id).setParentId(validation.getValidatedInt("Choose new Parent ID"));
+                break;
+            case "everything":
+                database.getChildren().get(id).setFirstName(validation.getValidatedName("Choose a new First Name"));
+                database.getChildren().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
+                database.getChildren().get(id).setAge(validation.getValidatedAge("Choose new Age"));
+                database.getChildren().get(id).setCpr(validation.getValidateCpr("Choose new CPR"));
+                database.getChildren().get(id).setParentId(validation.getValidatedInt("Choose new Parent ID"));
+                break;
+
+            default:
+                System.out.println("Wrong field");
+        }
+
+        String newLine = database.getChildren().get(id).toString();
+
+        try {
+            fm.modifyFile(oldLine,newLine,"children.txt",database.getChildren());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteChild(int id){
+        String oldLineChild = database.getChildren().get(id).toString();
+        String oldLineParent = database.getParents().get(database.getChildren().get(id).getParentId()).toStringConsole();
+        database.getChildren().remove(id);
+        database.getParents().get(database.getChildren().get(id).getParentId());
+        System.out.println("Child and Parent Information:");
+        System.out.println(oldLineChild);
+        System.out.println(oldLineParent);
+        System.out.println("Child and Parent was removed");
+
+    }
+
     public void createParent(String firstName, String lastName, String cpr, String email, String phoneNumber, int childId){
         int id = database.getParents().size();
         database.getChildren().get(childId).setParentId(id);
@@ -48,6 +140,90 @@ public class Controller {
             e.printStackTrace();
         }
 
+    }
+
+    public void displayParents() {
+        for(int i = 0; i < database.getParents().size(); i++) {
+            System.out.println(database.getParents().get(i));
+        }
+    }
+
+    public Boolean searchParents() throws InterruptedException {
+
+        String input = scanner.nextLine();
+        System.out.println();
+
+        boolean ok_object = false, ok_headline = false;
+
+        for(Parent p : database.getParents()) {
+
+            if (p.getId() == (Integer.parseInt(input)))  {
+
+                ok_object = true;
+
+                if(!ok_headline)  {
+                    System.out.printf("%-5s%-15s%-15s%-15s%-15s%-15s%-5s%n", "ID",  "First Name", "Last Name", "CPR", "Email", "Phone Number", "Child ID");
+                    System.out.println("----------------------------------------------------");
+                    ok_headline = true;
+                }
+                System.out.printf("%-5d%-15s%-15s%-15s%-15s%-15s%-5d%n", p.getId(), p.getFirstName(), p.getLastName(), p.getCpr(), p.getEmail(), p.getPhoneNumber(), p.getChildId());
+            }
+        }
+
+        System.out.println();
+
+        if(!ok_object)  {
+            System.out.println("The child hasn't been found");
+            Thread.sleep(1000);
+            return false;
+        }
+        return true;
+    }
+
+    public void updateParent(int id, String field) {
+
+        String oldLine = database.getParents().get(id).toString();
+
+        switch(field) {
+            case "firstName":
+                database.getParents().get(id).setFirstName(validation.getValidatedName("Choose a new First Name"));
+                break;
+
+            case "lastName":
+                database.getParents().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
+                break;
+            case "cpr":
+                database.getParents().get(id).setCpr(validation.getValidateCpr("Choose new CPR"));
+                break;
+            case "email":
+                database.getParents().get(id).setEmail(validation.getValidatedEmail("Choose new Email"));
+                break;
+            case "phoneNumber":
+                database.getParents().get(id).setPhoneNumber(validation.getValidatedPhone("Choose new Phone Number"));
+                break;
+            case "childId":
+                database.getParents().get(id).setChildId(validation.getValidatedInt("Choose new Child ID"));
+                break;
+            case "everything":
+                database.getParents().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
+                database.getParents().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
+                database.getParents().get(id).setCpr(validation.getValidateCpr("Choose new CPR"));
+                database.getParents().get(id).setEmail(validation.getValidatedEmail("Choose new Email"));
+                database.getParents().get(id).setPhoneNumber(validation.getValidatedPhone("Choose new Phone Number"));
+                database.getParents().get(id).setChildId(validation.getValidatedInt("Choose new Child ID"));
+                break;
+
+            default:
+                System.out.println("Wrong field");
+        }
+
+        String newLine = database.getParents().get(id).toString();
+
+        try {
+            fm.modifyFile(oldLine,newLine,"parents.txt",database.getParents());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public WaitingList getCurrentList(){

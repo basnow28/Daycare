@@ -10,6 +10,7 @@ import main.App;
 public class ChildrenMenu{
     private static Scanner scanner = new Scanner(System.in);
     private static Validation validation = new Validation();
+    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public ChildrenMenu(){}
 
@@ -21,7 +22,7 @@ public class ChildrenMenu{
         System.out.println("4. Exit");
     }
 
-    public static void displaySearchChildMenu(){
+        public static void displayChildrenMenuOptions(){
         System.out.println("Do you wish to perform further operations such as: ");
         System.out.println("1. Update the child's information");
         System.out.println("2. Remove the child from the list");
@@ -32,12 +33,12 @@ public class ChildrenMenu{
         String choice = "-1";
         do {
             displayChildrenMenu();
-            choice = scanner.next();
+            choice = br.readLine();
 
             switch (choice) {
                 case "1":
                     MainMenu.printEmptyLines();
-                    //App.getController().displayChild();
+                    App.getController().displayChildren();
                     MainMenu.printEmptyLines();
                     break;
 
@@ -48,41 +49,71 @@ public class ChildrenMenu{
                     break;
 
                 case "3":
-                    //MainMenu.printEmptyLines();
-                    //App.getController().searchChild();
-                    //MainMenu.printEmptyLines();
+                    MainMenu.printEmptyLines();
+                    searchChildMenu();
+                    MainMenu.printEmptyLines();
                     break;
 
                 case "4":
                     MainMenu.mainMenuAdmin();
                     break;
-            }
-        } while (!choice.equals("5"));
-    }
-
-    public static void searchChildMenu(){
-        String choice = "-1";
-        do {
-            displaySearchChildMenu();
-            choice = scanner.next();
-
-            switch (choice) {
-                case "1":
-                    //MainMenu.printEmptyLines();
-                    //App.getController().updateChild();
-                    //MainMenu.printEmptyLines();
-                    break;
-
-                case "2":
-                    //MainMenu.printEmptyLines();
-                    //App.getController().removeChild();
-                    //MainMenu.printEmptyLines();
-                    break;
-
-                case "3":
-                    break;
+                default:
+                    MainMenu.printEmptyLines();
+                    System.out.println("Choice must be a value between \"1\" and \"4\".");
+                    MainMenu.printEmptyLines();
+                    Thread.sleep(1000);
             }
         } while (!choice.equals("4"));
+    }
+
+    public static void searchChildMenu() throws IOException, InterruptedException{
+
+        String choice = "-1";
+        boolean repeat = true;
+        boolean updated = false;
+        boolean found = true;
+
+        do {
+
+            System.out.println("SEARCH CHILD MENU");
+            System.out.println("****************************");
+            choice = br.readLine();
+
+            if(repeat)  {
+                System.out.println("Type the <Child ID>");
+                found = App.getController().searchChildren();
+            }
+
+            if(!found) {
+                MainMenu.printEmptyLines();
+                continue;
+            }
+
+            displayChildrenMenuOptions();
+
+            choice = br.readLine();
+            switch (choice) {
+                case "1":
+                    updateChildMenu();
+                    repeat = false;
+                    updated = true;
+                    MainMenu.printEmptyLines();
+                    break;
+                case "2":
+                    deleteChildMenu();
+                    repeat = false;
+                    updated = true;
+                    MainMenu.printEmptyLines();
+                    break;
+                case "3":
+                    break;
+                default:
+                    MainMenu.printEmptyLines();
+                    System.out.println("Choice must be a value between \"1\" and \"3\".");
+                    MainMenu.printEmptyLines();
+                    Thread.sleep(1000);
+            }
+        } while (!choice.equals("3") && !updated);
     }
 
     private static void createChild(){
@@ -92,6 +123,68 @@ public class ChildrenMenu{
         String cpr = validation.getValidateCpr("Child's cpr number?");
         int childId = App.getController().createChild(firstName, lastName, age, cpr);
         createParent(childId);
+    }
+
+    public static void updateChildMenu()  throws IOException, InterruptedException {
+        System.out.println("Type the <ID> of the Child you want to modify ");
+        int toUpdate = scanner.nextInt();
+
+        String choice = "-1";
+        do {
+            System.out.println();
+            System.out.println("Choose what to modify: ");
+            System.out.println("[1] Child First Name");
+            System.out.println("[2] Child Last Name");
+            System.out.println("[3] Child Age");
+            System.out.println("[4] Child CPR");
+            System.out.println("[5] Child's Parent ID");
+            System.out.println("[6] Everything");
+            System.out.println("[7] Go back");
+
+            choice = br.readLine();
+            switch (choice) {
+                case "1":
+                    MainMenu.printEmptyLines();
+                    App.getController().updateChild(toUpdate, "firstName");
+                    MainMenu.printEmptyLines();
+                    break;
+
+                case "2":
+                    MainMenu.printEmptyLines();
+                    App.getController().updateChild(toUpdate, "lastName");
+                    MainMenu.printEmptyLines();
+                    break;
+
+                case "3":
+                    MainMenu.printEmptyLines();
+                    App.getController().updateChild(toUpdate, "age");
+                    MainMenu.printEmptyLines();
+                    break;
+
+                case "4":
+                    MainMenu.printEmptyLines();
+                    App.getController().updateChild(toUpdate, "cpr");
+                    MainMenu.printEmptyLines();
+                    break;
+
+                case "5":
+                    MainMenu.printEmptyLines();
+                    App.getController().updateChild(toUpdate, "parentId");
+                    MainMenu.printEmptyLines();
+                    break;
+                case "6":
+                    MainMenu.printEmptyLines();
+                    App.getController().updateChild(toUpdate, "everything");
+                    MainMenu.printEmptyLines();
+                    break;
+            }
+        }while(!choice.equals("7"));
+    }
+
+    public static void deleteChildMenu()  throws IOException, InterruptedException {
+        System.out.println("Type the <ID> of the Child you want to modify ");
+        int toDelete = scanner.nextInt();
+        App.getController().deleteChild(toDelete);
     }
 
     private static void createParent(int childId){
