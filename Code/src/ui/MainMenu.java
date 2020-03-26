@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class MainMenu {
     private static Scanner scanner = new Scanner(System.in);
 
-    public MainMenu() throws InterruptedException, IOException {
+    public MainMenu() {
         mainMenuAdmin();
     }
 

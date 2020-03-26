@@ -194,6 +194,7 @@ public class FileManagement {
     public void deleteFromFile(String lineToDelete, String fileName, ArrayList <?> arr)  throws FileNotFoundException, IOException{
         File inputFile = new File(fileName);
         File tempFile = new File("myTempFile.txt");
+        String inputFileName = inputFile.getName();
 
         BufferedReader input = new BufferedReader(new FileReader(inputFile));
         BufferedWriter output = new BufferedWriter(new FileWriter(tempFile));
@@ -212,8 +213,8 @@ public class FileManagement {
             }
         }
         inputFile.setWritable(true);
-        tempFile.renameTo(inputFile);
         inputFile.delete();
+        tempFile.renameTo(inputFile);
         output.close();
         input.close();
     }

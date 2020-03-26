@@ -85,6 +85,7 @@ public class ChildrenMenu{
 
             System.out.println("SEARCH CHILD MENU");
             System.out.println("****************************");
+            System.out.println("Choose field");
             try {
                 choice = br.readLine();
             } catch (IOException e) {
