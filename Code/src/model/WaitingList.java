@@ -44,7 +44,7 @@ public class WaitingList{
     }
 
     public String toString(){
-        return this.id + " " + this.quarter + " " + year + childrenIds.toString() + '\n';
+        return "id: " + this.id + ", " + this.year + " " + this.quarter + ", " + " capacity:"+ this.capacity;
     }
 
     public String toStringConsole(){

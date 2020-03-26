@@ -128,7 +128,7 @@ public class Controller {
             }
         }
         for(WaitingList wl : waitingLists){
-            System.out.println(wl.getId() + " " + wl.getYear() + " " + wl.getQuarter() + ", " + wl.getCapacity() + " capacity");
+            System.out.println(wl.toString());
             System.out.println("Children: ");
             displayChildrenFromList(wl.getId());
             System.out.println();
@@ -160,6 +160,7 @@ public class Controller {
         System.out.println(newLine);
         try {
             fm.modifyFile(oldLine, newLine, WAITING_LISTS_FILE, database.getWaitingLists());
+            System.out.println("Updated successfully");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -178,7 +179,18 @@ public class Controller {
     }
 
     public String findChildOnAList(String key){
-        return "";
+        String children = "";
+        for(Child child : database.getChildren()){
+            if(child.toString().contains(key))
+            for(WaitingList wl : database.getWaitingLists()){
+                for(int id : wl.getChildrenIds()){
+                    if(child.getId() == id){
+                        children += child.toString() + "\t| LIST:" +wl.getId() + "  " + wl.getYear() + " " + wl.getQuarter() + "\n";
+                    }
+                }
+            }
+        }
+        return children;
     }
 
     public void displayShifts() {

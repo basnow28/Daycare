@@ -1,4 +1,5 @@
 package ui;
+import com.sun.tools.javac.Main;
 import main.App;
 import model.Quarter;
 import model.WaitingList;
@@ -74,25 +75,30 @@ public class ListMenu {
         System.out.println("Write any field from the list you want to work on");
         String key = scanner.next();
 
-        if(App.getController().getWaitingList(key).size() > 0){
+        if(App.getController().getWaitingList(key).size() > 0) {
+            MainMenu.typeAnyKey();
             System.out.println("What do you want to do next? ");
             System.out.println("1. Modify the list information");
             System.out.println("2. Delete a child from list");
             System.out.println("3. Go back");
             String choice = scanner.next();
-
-            if(choice.equals("1")){
-                int id = validation.getValidatedInt("Which waiting list you do you want to modify? Write the ID");
-                modifyList(id);
-            }
-            else if(choice.equals("2")){
-                int listId = validation.getValidatedInt("From which list do you want to delete a child? Write the id");
-                int id = validation.getValidatedInt("Which child do you want to delete? Write down the id");
-                deleteChild(listId, id);
-            }
-            else{
-                listMenu();
-            }
+            int id;
+            switch (choice) {
+                case "1":
+                    App.getController().getWaitingList(key);
+                    id = validation.getValidatedInt("Which waiting list you do you want to modify? Write the ID");
+                    modifyList(id);
+                    break;
+                case "2":
+                    int listId = validation.getValidatedInt("From which list do you want to delete a child? Write the id");
+                    App.getController().displayChildrenFromList(listId);
+                    id = validation.getValidatedInt("Which child do you want to delete? Write down the id");
+                    deleteChild(listId, id);
+                    break;
+                default:
+                    listMenu();
+                    break;
+        }
         }else{
             System.out.println("There is no list that matches the criteria");
             System.out.println("Do you want to search again? ");
@@ -107,6 +113,7 @@ public class ListMenu {
 
         if(field.toLowerCase().equals("year") || field.toLowerCase().equals("quarter") || field.toLowerCase().equals("capacity")) {
             App.getController().updateWaitingList(id, field);
+            MainMenu.typeAnyKey();
         }else{
             System.out.println("There is no such a field to update");
             modifyList(id);
@@ -118,6 +125,9 @@ public class ListMenu {
     }
 
     private static void searchForAChild(){
-
+        System.out.println("Write any field from the child information that you are looking for");
+        String key = scanner.next();
+        System.out.println(App.getController().findChildOnAList(key));
+        MainMenu.typeAnyKey();
     }
 }
