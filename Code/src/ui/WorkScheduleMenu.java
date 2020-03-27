@@ -8,12 +8,18 @@ import java.io.*;
 import java.util.Scanner;
 
 public class WorkScheduleMenu{
-    //Console Inputs
+    //  Console Inputs
     private static Scanner console = new Scanner(System.in);
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+
+    //  Instantiate Validation Object
+    private static Validation validation = new Validation();
+
+    //  Constructors
     public WorkScheduleMenu() {}
 
+    //  UI Methods
     public static void displayWorkScheduleMenu(){
         System.out.println("\t\t\t -MANAGE WORK SCHEDULE MENU- \t\t\t");
         System.out.println("[1] Display the work schedule");
@@ -38,12 +44,14 @@ public class WorkScheduleMenu{
                 case "1":
                     MainMenu.printEmptyLines();
                     App.getController().displayWorkSchedule();
+                    validation.doesStop();
                     MainMenu.printEmptyLines();
                     break;
 
                 case "2":
                     MainMenu.printEmptyLines();
                     App.getController().createWorkSchedule();
+                    validation.doesStop();
                     MainMenu.printEmptyLines();
                     break;
 
@@ -129,8 +137,8 @@ public class WorkScheduleMenu{
     }
 
     public static void updateWorkScheduleMenu(){
-        System.out.println("Type the <ID> of the Work Schedule you want to modify ");
-        int toUpdate = console.nextInt();
+
+        int toUpdate = validation.getValidatedInt("Type the <ID> of the Work Schedule you want to modify");
 
         String choice = "-1";
         do {

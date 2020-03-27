@@ -120,6 +120,6 @@ public class MainMenu {
     public static void typeAnyKey(){
         System.out.println("\nType any key to continue");
         scanner.next();
-    }
+    }   //this should be in Validation class tho    EDIT: created sth else there, a bit more specific
 }
 

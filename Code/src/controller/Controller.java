@@ -537,7 +537,6 @@ public class Controller {
         return database.getShifts();
     }
 
-
     // EMPLOYEE //
     public void createEmployee() {
         Employee employee = new Employee();
@@ -670,13 +669,4 @@ public class Controller {
         }
         return true;
     }
-
-    public void debug() {
-        try {
-            fm.modifyFile(database.getWorkSchedules().get(0).toString(),"0  3  [0, 1]",
-                    "workSchedules.txt",database.getWorkSchedules());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }   //it was a hell of an adventure, testing purposes, keep it here for now pls
 }

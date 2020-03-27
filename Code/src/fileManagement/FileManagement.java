@@ -184,9 +184,6 @@ public class FileManagement {
         input.close();
 
         String newText = oldText.replace(oldLine,newLine);
-        System.out.println(oldLine);
-        System.out.println(newLine);
-        System.out.println(oldText);
         FileWriter output = new FileWriter(fileName);
         output.write(newText);
         output.close();

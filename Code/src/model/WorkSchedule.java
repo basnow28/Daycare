@@ -30,9 +30,20 @@ public class WorkSchedule {
 
         String[] ids = shiftIds.replaceAll("\\[|\\]| ", "").split(",");
 
-        if(ids.length > 1)
-        for (int i = 0; i < ids.length; i++) {
-            this.shiftIds.add(Integer.parseInt(ids[i]));
+        int length = ids.length;
+
+        if(ids.length == 1) {       //java shit stuff, even if the string is empty, the length is still 1
+            try {
+                Integer.parseInt(ids[0]);
+            } catch (NumberFormatException e) {
+                length = 0;     //hacks ^^
+            }
+        }
+
+        if(length != 0) {
+            for (int i = 0; i < ids.length; i++) {
+                this.shiftIds.add(Integer.parseInt(ids[i]));
+            }
         }
     }
 

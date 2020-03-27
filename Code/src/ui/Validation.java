@@ -171,6 +171,15 @@ public class Validation {
         return getValidatedQuarter(message);
     }
 
+    public String getValidatedYear(String message) {
+        System.out.println(message);
+        String year = scanner.nextLine();
+        if(Integer.parseInt(year) > 2020 && year.length() == 4){
+            return year;
+        }
+        System.out.println("Invalid year. Year has 4 digits and cannot be the past year");
+        return getValidatedYear(message);
+    }
 
     public String getValidatedAnswer(String message) {
         System.out.println(message);
@@ -185,15 +194,20 @@ public class Validation {
         return !(input.equalsIgnoreCase("N") || input.equalsIgnoreCase("NO") ||
                 input.equalsIgnoreCase("Y") || input.equalsIgnoreCase("YES"));
     }
-  
-    public String getValidatedYear(String message) {
-        System.out.println(message);
-        String year = scanner.nextLine();
-        if(Integer.parseInt(year) > 2020 && year.length() == 4){
-            return year;
+
+    public void doesStop() {
+        System.out.println();   //Readability
+        System.out.println("Do you want to do continue? (Type \"Y/YES\" or \"N/NO\")");
+
+        String input = scanner.next();
+        while(isNotYesOrNO(input)) {     //Input Validation
+            System.out.println("Wrong input. Type Type \"Y/YES\" or \"N/NO\"");
+            input = scanner.next();
         }
-        System.out.println("Invalid year. Year has 4 digits and cannot be the past year");
-        return getValidatedYear(message);
+
+        if(input.equalsIgnoreCase("N") || input.equalsIgnoreCase("NO"))   {
+            System.exit(0);
+        }
     }
 }
 
