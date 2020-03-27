@@ -89,8 +89,64 @@ public class ChildrenMenu{
 
 
             if(repeat)  {
-                System.out.println("Type the <Child ID>");
-                found = App.getController().searchChildren();
+                System.out.println();
+                System.out.println("Choose do you want to search: ");
+                System.out.println("[1] Child ID");
+                System.out.println("[2] Child First Name");
+                System.out.println("[3] Child Last Name");
+                System.out.println("[4] Child Age");
+                System.out.println("[5] Child CPR");
+                System.out.println("[6] Child's Parent ID");
+
+                try {
+                    choice = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                switch (choice) {
+                    case "1":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchChildren("id");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                    case "2":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchChildren("firstName");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                    case "3":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchChildren("lastName");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                    case "4":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchChildren("age");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                    case "5":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchChildren("cpr");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                    case "6":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchChildren("parentId");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                }
+
+
+
+                /*System.out.println("Type the <Child ID>");
+                found = App.getController().searchChildren();*/
             }
 
             if(!found) {

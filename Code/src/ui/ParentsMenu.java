@@ -78,9 +78,68 @@ public class ParentsMenu{
             System.out.println("SEARCH PARENT MENU");
             System.out.println("****************************");
 
+
             if(repeat)  {
-                System.out.println("Type the <PARENT ID>");
-                found = App.getController().searchParents();
+                System.out.println();
+                System.out.println("Choose do you want to search: ");
+                System.out.println("[1] Parent ID");
+                System.out.println("[2] Parent First Name");
+                System.out.println("[3] Parent Last Name");
+                System.out.println("[4] Parent CPR");
+                System.out.println("[5] Parent Email");
+                System.out.println("[6] Parent Phone Number");
+                System.out.println("[7] Parent's Child ID");
+
+                try {
+                    choice = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                switch (choice) {
+                    case "1":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchParents("id");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                    case "2":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchParents("firstName");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                    case "3":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchParents("lastName");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                    case "4":
+                    MainMenu.printEmptyLines();
+                    found = App.getController().searchParents("cpr");
+                    MainMenu.printEmptyLines();
+                        break;
+
+                    case "5":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchParents("email");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                    case "6":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchParents("phoneNumber");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                    case "7":
+                        MainMenu.printEmptyLines();
+                        found = App.getController().searchParents("childId");
+                        MainMenu.printEmptyLines();
+                        break;
+
+                }
             }
 
             if(!found) {
