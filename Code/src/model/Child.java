@@ -75,8 +75,8 @@ public class Child{
     }
 
     //  Printing
-    public void toStringConsoleFormat(){
-        System.out.printf("%-5d%-15s%-15s%-15s%-5d%-5d%n",id, firstName, lastName, cpr, age, parentId);
+    public String toStringConsoleFormat(){
+        return String.format("%-5d%-15s%-15s%-15s%-10d%-15d",id, firstName, lastName, cpr, age, parentId);
     }
 
     public String toString(){

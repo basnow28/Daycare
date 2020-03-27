@@ -77,4 +77,8 @@ public abstract class Person {
     public String toString(){
         return String.join("  ", Integer.toString(id), firstName, lastName, cpr, email, phoneNumber);
     }
+
+    public String toStringConsoleFormat(){
+        return String.format("%-5d%-15s%-15s%-15s%-15s%-15s",id, firstName, lastName, cpr, email, phoneNumber);
+    }
 }
