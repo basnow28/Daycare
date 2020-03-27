@@ -66,6 +66,8 @@ public class ListMenu {
 
     private static void displayCurrentList(){
         System.out.println("Current list:");
+        System.out.printf("%-5s%-15s%-15s%-5s%-15s%-15s%n","ID","First Name", "Last Name", "Age", "CPR", "Parent");
+        System.out.println("----------------------------------------------------------------------------------");
         App.getController().displayChildrenFromList(0);
         MainMenu.typeAnyKey();
     }
@@ -75,6 +77,7 @@ public class ListMenu {
         String key = scanner.next();
 
         if(App.getController().getWaitingList(key).size() > 0) {
+            App.getController().displayWaitingLists(App.getController().getWaitingList(key));
             MainMenu.typeAnyKey();
             System.out.println("What do you want to do next? ");
             System.out.println("1. Modify the list information");
@@ -85,14 +88,19 @@ public class ListMenu {
             switch (choice) {
                 case "1":
                     App.getController().getWaitingList(key);
-                    id = validation.getValidatedInt("Which waiting list you do you want to modify? Write the ID");
+                    id = validation.getValidatedIntFromRange("Which waiting list you do you want to modify? Write the ID", App.getController().getWaitingListsIds(key));
                     modifyList(id);
                     break;
                 case "2":
-                    int listId = validation.getValidatedInt("From which list do you want to delete a child? Write the id");
+                    int listId = validation.getValidatedIntFromRange("From which list do you want to delete a child? Write the id", App.getController().getWaitingListsIds(key));
                     App.getController().displayChildrenFromList(listId);
-                    id = validation.getValidatedInt("Which child do you want to delete? Write down the id");
-                    deleteChild(listId, id);
+                    if(App.getController().getChildrenIdsFromList(listId).size()!=0) {
+                        id = validation.getValidatedIntFromRange("Which child do you want to delete? Write down the id", App.getController().getChildrenIdsFromList(listId));
+                        deleteChild(listId, id);
+                    }else{
+                        System.out.println("There are no children to be deleted");
+                        MainMenu.typeAnyKey();
+                    }
                     break;
                 default:
                     listMenu();
@@ -106,12 +114,14 @@ public class ListMenu {
     }
 
     private static void modifyList(int id){
+        App.getController().displayList(id);
         System.out.println("Which field do you want to update?");
         System.out.println("year / quarter / capacity");
         String field = scanner.next();
 
         if(field.toLowerCase().equals("year") || field.toLowerCase().equals("quarter") || field.toLowerCase().equals("capacity")) {
             App.getController().updateWaitingList(id, field);
+            App.getController().displayList(id);
             MainMenu.typeAnyKey();
         }else{
             System.out.println("There is no such a field to update");

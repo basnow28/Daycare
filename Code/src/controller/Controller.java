@@ -274,7 +274,7 @@ public class Controller {
             System.out.println("List is empty");
         }else{
         for(Child child : getChildrenFromList(id)){
-            System.out.println(child.toString());
+            child.toStringConsoleFormat();
         }}
     }
 
@@ -286,10 +286,10 @@ public class Controller {
         String oldLine = database.getList(listId).toString();
         database.getList(listId).addChild(childId);
         String newLine = database.getList(listId).toString();
-        System.out.println(oldLine);
-        System.out.println(newLine);
         try {
             fm.modifyFile(oldLine, newLine, WAITING_LISTS_FILE, database.getWaitingLists());
+            System.out.println("Added successfully");
+            displayList(listId);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -314,25 +314,38 @@ public class Controller {
                 waitingLists.add(waitingList);
             }
         }
+        return waitingLists;
+    }
+
+    public void displayWaitingLists(ArrayList<WaitingList> waitingLists){
+        System.out.printf("%-5s%-15s%-10s%-15s%-15s%n","ID", "Quarter", "Year", "Capacity", "Children IDs");
+        System.out.println("--------------------------------------------------------------------");
         for(WaitingList wl : waitingLists){
             //headline  -  it'll be displayed for every iteration in this case, because you display multiple details
-                        //on multiple lines, otherwise it gets a bit lost
-            System.out.printf("%-5s%-15s%-10s%-15s%-15s%n","ID", "Quarter", "Year", "Capacity", "Children IDs");
-            System.out.println("--------------------------------------------------------------------");
+            //on multiple lines, otherwise it gets a bit lost
             //I added it, but it's up to you whether you keep it or not
             wl.toStringConsole();
             System.out.println("Children: ");
             displayChildrenFromList(wl.getId());
             System.out.println();
-            System.out.println();   //another space is a bit needed, for clarity
+            System.out.println("--------------------------------------------------------------------");
         }
-        return waitingLists;
+    }
+
+    public void displayAllWaitingLists(){
+        System.out.printf("%-5s%-15s%-10s%-15s%-15s%n","ID", "Quarter", "Year", "Capacity", "Children IDs");
+        System.out.println("--------------------------------------------------------------------");
+        for(WaitingList wl : database.getWaitingLists()){
+            //headline  -  it'll be displayed for every iteration in this case, because you display multiple details
+            //on multiple lines, otherwise it gets a bit lost
+            //I added it, but it's up to you whether you keep it or not
+            wl.toStringConsole();
+        }
     }
 
     public void updateWaitingList(int id, String field) {
         String oldLine = database.getWaitingLists().get(id).toString();
         String newLine;
-        System.out.println(oldLine);
         switch (field.toLowerCase()) {
             case "year":
                 String newValue = validation.getValidatedYear("Write new " + field);
@@ -350,7 +363,6 @@ public class Controller {
                 break;
         }
         newLine = database.getWaitingLists().get(id).toString();
-        System.out.println(newLine);
         try {
             fm.modifyFile(oldLine, newLine, WAITING_LISTS_FILE, database.getWaitingLists());
             System.out.println("Updated successfully");
@@ -374,7 +386,7 @@ public class Controller {
     public String findChildOnAList(String key){
         String children = "";
         for(Child child : database.getChildren()){
-            if(child.toString().contains(key))
+            if(child.toString().toLowerCase().contains(key.toLowerCase()))
             for(WaitingList wl : database.getWaitingLists()){
                 for(int id : wl.getChildrenIds()){
                     if(child.getId() == id){
@@ -672,5 +684,42 @@ public class Controller {
             return false;
         }
         return true;
+    }
+
+    public ArrayList<Integer> getWaitingListsIds() {
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+
+        for(WaitingList wl : database.getWaitingLists()){
+            ids.add(wl.getId());
+        }
+        return ids;
+    }
+
+    public ArrayList<Integer> getWaitingListsIds(String key) {
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+
+        for(WaitingList wl : getWaitingList(key)){
+            ids.add(wl.getId());
+        }
+        return ids;
+    }
+
+    public ArrayList<Integer> getChildrenIds() {
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+
+        for(Child child : database.getChildren()){
+            ids.add(child.getId());
+        }
+        return ids;
+    }
+
+    public void displayList(int listId) {
+        System.out.printf("%-5s%-15s%-10s%-15s%-15s%n","ID", "Quarter", "Year", "Capacity", "Children IDs");
+        System.out.println("--------------------------------------------------------------------");
+        database.getList(listId).toStringConsole();
+    }
+
+    public ArrayList<Integer> getChildrenIdsFromList(int listId) {
+        return database.getList(listId).getChildrenIds();
     }
 }

@@ -2,6 +2,7 @@ package ui;
 import java.io.*;
 import java.util.Scanner;
 
+import com.sun.tools.javac.Main;
 import controller.Controller;
 import main.App;
 
@@ -18,8 +19,9 @@ public class ChildrenMenu{
         System.out.println("\t\t\t -MANAGE CHILDREN MENU- \t\t\t");
         System.out.println("1. Display information on children");
         System.out.println("2. Add new child to the Waiting list");
-        System.out.println("3. Search for a child");
-        System.out.println("4. Exit");
+        System.out.println("3. Add existing child to the Waiting list");
+        System.out.println("4. Search for a child");
+        System.out.println("5. Exit");
     }
 
         public static void displayChildrenMenuOptions(){
@@ -51,14 +53,18 @@ public class ChildrenMenu{
                     createChild();
                     MainMenu.printEmptyLines();
                     break;
-
                 case "3":
+                    MainMenu.printEmptyLines();
+                    addExistingChildToList();
+                    MainMenu.printEmptyLines();
+                    break;
+                case "4":
                     MainMenu.printEmptyLines();
                     searchChildMenu();
                     MainMenu.printEmptyLines();
                     break;
 
-                case "4":
+                case "5":
                     break;
                 default:
                     MainMenu.printEmptyLines();
@@ -70,7 +76,7 @@ public class ChildrenMenu{
                         e.printStackTrace();
                     }
             }
-        } while (!choice.equals("4"));
+        } while (!choice.equals("5"));
     }
 
     public static void searchChildMenu(){
@@ -148,15 +154,6 @@ public class ChildrenMenu{
         } while (!choice.equals("3") && !updated);
     }
 
-    private static void createChild(){
-        String firstName = validation.getValidatedName("Child's first name?");
-        String lastName = validation.getValidatedName("Child's last name?");
-        int age = validation.getValidatedAge("Child's age?");
-        String cpr = validation.getValidatedCpr("Child's cpr number?");
-        int childId = App.getController().createChild(firstName, lastName, age, cpr);
-        createParent(childId);
-    }
-
     public static void updateChildMenu(){
         System.out.println("Type the <ID> of the Child you want to modify ");
         int toUpdate = scanner.nextInt();
@@ -217,6 +214,15 @@ public class ChildrenMenu{
         }while(!choice.equals("7"));
     }
 
+    private static void createChild(){
+        String firstName = validation.getValidatedName("Child's first name?");
+        String lastName = validation.getValidatedName("Child's last name?");
+        int age = validation.getValidatedAge("Child's age?");
+        String cpr = validation.getValidatedCpr("Child's cpr number?");
+        int childId = App.getController().createChild(firstName, lastName, age, cpr);
+        createParent(childId);
+    }
+
     public static void deleteChildMenu() {
         System.out.println("Type the <ID> of the Child you want to modify ");
         int toDelete = scanner.nextInt();
@@ -235,10 +241,27 @@ public class ChildrenMenu{
     }
 
     private static void addChildToWaitingList(int childId){
-        System.out.println("To which waiting list would you like to add the child?");
-        System.out.println(App.getController().getWaitingLists().toString());
-        int listId =validation.getValidatedInt("Which waiting list do you choose? Write down the id");
+        App.getController().displayAllWaitingLists();
+        int listId = validation.getValidatedIntFromRange("Which waiting list do you choose? Write down the id", App.getController().getWaitingListsIds());
         App.getController().addChildToWaitingList(childId, listId);
-        System.out.println(App.getController().getWaitingLists());
+        MainMenu.typeAnyKey();
+    }
+
+    private static void addExistingChildToList() {
+        int childId;
+        int listId;
+
+        System.out.println();
+        App.getController().displayAllWaitingLists();
+        listId = validation.getValidatedIntFromRange("To which list do you want to add a child?. Type list id", App.getController().getWaitingListsIds());
+        System.out.println();
+        App.getController().displayList(listId);
+        System.out.println();
+        App.getController().displayChildren();
+        childId = validation.getValidatedIntFromRange("Which child? Type child id", App.getController().getChildrenIds());
+
+        App.getController().addChildToWaitingList(childId, listId);
+
+        MainMenu.typeAnyKey();
     }
 }

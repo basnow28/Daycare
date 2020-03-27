@@ -38,7 +38,7 @@ public class Validation {
     }
 
     private boolean validateAge(String age){
-        Pattern pattern = Pattern.compile("[1-6]");
+        Pattern pattern = Pattern.compile("[1-5]");
         Matcher matcher = pattern.matcher(age);
         return matcher.matches();
     }
@@ -58,6 +58,13 @@ public class Validation {
     private boolean validateQuarter(String quarter){
         for(Quarter quarterValue : Quarter.values()){
             if(quarter.toUpperCase().equals(quarterValue.toString()))
+                return true;
+        }
+        return false;
+    }
+    private boolean validateIntFromRange(int number, ArrayList<Integer> range) {
+        for(int i : range){
+            if(number == i)
                 return true;
         }
         return false;
@@ -143,7 +150,7 @@ public class Validation {
             return phoneNumber;
         }
         System.out.println("Invalid phone number. Should have 8 digits. Try again");
-        return getValidatedEmail(message);
+        return getValidatedPhone(message);
     }
 
 
@@ -208,6 +215,16 @@ public class Validation {
         if(input.equalsIgnoreCase("N") || input.equalsIgnoreCase("NO"))   {
             System.exit(0);
         }
+    }
+
+    public int getValidatedIntFromRange(String message, ArrayList<Integer> range){
+        System.out.print(message);
+        int number = getValidatedInt("");
+        if(validateIntFromRange(number, range)){
+            return number;
+        }
+        System.out.println("The id does not exist");
+        return getValidatedIntFromRange(message, range);
     }
 }
 
