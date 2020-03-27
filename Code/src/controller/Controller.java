@@ -140,8 +140,16 @@ public class Controller {
     public void deleteChild(int id){
         String oldLineChild = database.getChildren().get(id).toString();
         String oldLineParent = database.getParents().get(database.getChildren().get(id).getParentId()).toString();
+
+        try {
+            fm.deleteFromFile(oldLineChild, CHILDREN_FILE, database.getChildren());
+            fm.deleteFromFile(oldLineParent, PARENTS_FILE, database.getParents());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
         database.getChildren().remove(id);
-        database.getParents().get(database.getChildren().get(id).getParentId());
+        database.getParents().remove(database.getParents().get(database.getChildren().get(id).getParentId()));
         System.out.println("Child and Parent Information:");
         System.out.println(oldLineChild);
         System.out.println(oldLineParent);

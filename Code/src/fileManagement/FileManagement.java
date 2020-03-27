@@ -193,13 +193,13 @@ public class FileManagement {
     public void deleteFromFile(String lineToDelete, String fileName, ArrayList <?> arr)  throws FileNotFoundException, IOException{
         File inputFile = new File(fileName);
         File tempFile = new File("myTempFile.txt");
-        String inputFileName = inputFile.getName();
 
         BufferedReader input = new BufferedReader(new FileReader(inputFile));
         BufferedWriter output = new BufferedWriter(new FileWriter(tempFile));
 
         String currentLine;
         int line = 0;
+
         while((currentLine = input.readLine()) != null) {
             String trimmedLine = currentLine.trim();
             line++;
@@ -211,11 +211,9 @@ public class FileManagement {
                 output.write(currentLine);
             }
         }
-        inputFile.setWritable(true);
-        inputFile.delete();
-        tempFile.renameTo(inputFile);
-        output.close();
         input.close();
+        output.close();
+        boolean successful = tempFile.renameTo(inputFile);
     }
 
     public void addNewLineToFile(String line, int arraySize, String fileName) throws IOException{
