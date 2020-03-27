@@ -50,8 +50,9 @@ public class Controller {
     }
 
     public void displayChildren() {
+        System.out.printf("%-5s%-15s%-15s%-5s%-15s%-15s%n","ID","First Name", "Last Name", "Age", "CPR", "Parent");
         for(int i = 0; i < database.getChildren().size(); i++) {
-            System.out.println(database.getChildren().get(i));
+            database.getChildren().get(i).toStringConsoleFormat();
         }
     }
 
@@ -77,10 +78,11 @@ public class Controller {
             }
         }
 
-        System.out.println();
+        System.out.println("");
 
         if(!ok_object)  {
             System.out.println("The child hasn't been found");
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -126,6 +128,8 @@ public class Controller {
 
         String newLine = database.getChildren().get(id).toString();
 
+        System.out.println("Child was updated:");
+        database.getChildren().get(id).toStringConsoleFormat();
         try {
             fm.modifyFile(oldLine,newLine,"children.txt",database.getChildren());
         } catch (IOException e) {

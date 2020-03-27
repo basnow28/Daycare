@@ -72,6 +72,8 @@ public class ParentsMenu{
         boolean updated = false;
         boolean found = true;
 
+        String continue_search = "";
+
         do {
             System.out.println("SEARCH PARENT MENU");
             System.out.println("****************************");
@@ -83,7 +85,21 @@ public class ParentsMenu{
 
             if(!found) {
                 MainMenu.printEmptyLines();
-                continue;
+                System.out.println("");
+                System.out.println("Do you want to search again?(Type Y/N): ");
+                try {
+                    continue_search = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (continue_search.equals("N")){
+                    break;
+                }else{
+                    System.out.println("");
+                    continue;
+
+                }
             }
 
             displayParentsMenuOptions();

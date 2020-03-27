@@ -57,6 +57,7 @@ public class MainMenu {
                     printEmptyLines();
                     ParentsMenu.parentsMenu();
                     printEmptyLines();
+                    break;
 
                 case "3":
                     printEmptyLines();

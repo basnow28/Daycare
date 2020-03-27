@@ -80,6 +80,8 @@ public class ChildrenMenu{
         boolean updated = false;
         boolean found = true;
 
+        String continue_search = "";
+
         do {
 
             System.out.println("SEARCH CHILD MENU");
@@ -93,7 +95,21 @@ public class ChildrenMenu{
 
             if(!found) {
                 MainMenu.printEmptyLines();
-                continue;
+                System.out.println("");
+                System.out.println("Do you want to search again?(Type Y/N): ");
+                try {
+                    continue_search = br.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (continue_search.equals("N")){
+                    break;
+                }else{
+                    System.out.println("");
+                    continue;
+
+                }
             }
 
             displayChildrenMenuOptions();
@@ -208,6 +224,7 @@ public class ChildrenMenu{
     }
 
     private static void createParent(int childId){
+        System.out.println("\nParent Information");
         String firstName = validation.getValidatedName("Parent's first name?");
         String lastName = validation.getValidatedName("Parent's last name?");
         String cpr = validation.getValidatedCpr("Parent's cpr number?");
