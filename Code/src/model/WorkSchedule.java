@@ -30,6 +30,7 @@ public class WorkSchedule {
 
         String[] ids = shiftIds.replaceAll("\\[|\\]| ", "").split(",");
 
+        if(ids.length > 1)
         for (int i = 0; i < ids.length; i++) {
             this.shiftIds.add(Integer.parseInt(ids[i]));
         }

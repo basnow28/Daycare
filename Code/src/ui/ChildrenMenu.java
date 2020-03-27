@@ -59,7 +59,6 @@ public class ChildrenMenu{
                     break;
 
                 case "4":
-                    MainMenu.mainMenuAdmin();
                     break;
                 default:
                     MainMenu.printEmptyLines();
@@ -85,12 +84,7 @@ public class ChildrenMenu{
 
             System.out.println("SEARCH CHILD MENU");
             System.out.println("****************************");
-            System.out.println("Choose field");
-            try {
-                choice = br.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
 
             if(repeat)  {
                 System.out.println("Type the <Child ID>");
@@ -109,6 +103,7 @@ public class ChildrenMenu{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             switch (choice) {
                 case "1":
                     updateChildMenu();

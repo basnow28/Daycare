@@ -28,11 +28,15 @@ public class ParentsMenu{
         System.out.println("2. Exit");
     }
 
-    public static void childrenMenu() throws InterruptedException, IOException {
+    public static void parentsMenu() {
         String choice = "-1";
         do {
             displayParentsMenu();
-            choice = br.readLine();
+            try {
+                choice = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             switch (choice) {
                 case "1":
@@ -48,18 +52,21 @@ public class ParentsMenu{
                     break;
 
                 case "3":
-                    MainMenu.mainMenuAdmin();
                     break;
                 default:
                     MainMenu.printEmptyLines();
                     System.out.println("Choice must be a value between \"1\" and \"3\".");
                     MainMenu.printEmptyLines();
-                    Thread.sleep(1000);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
             }
         } while (!choice.equals("3"));
     }
 
-    public static void searchParentMenu() throws IOException, InterruptedException{
+    public static void searchParentMenu() {
         String choice = "-1";
         boolean repeat = true;
         boolean updated = false;
@@ -68,7 +75,6 @@ public class ParentsMenu{
         do {
             System.out.println("SEARCH PARENT MENU");
             System.out.println("****************************");
-            choice = br.readLine();
 
             if(repeat)  {
                 System.out.println("Type the <PARENT ID>");
@@ -82,7 +88,11 @@ public class ParentsMenu{
 
             displayParentsMenuOptions();
 
-            choice = br.readLine();
+            try {
+                choice = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             switch (choice) {
 
                 case "1":
@@ -98,13 +108,17 @@ public class ParentsMenu{
                     MainMenu.printEmptyLines();
                     System.out.println("Choice must be a value between \"1\" and \"2\".");
                     MainMenu.printEmptyLines();
-                    Thread.sleep(1000);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
             }
         } while (!choice.equals("2") && !updated);
     }
 
 
-    public static void updateParentMenu()  throws IOException, InterruptedException {
+    public static void updateParentMenu()   {
         System.out.println("Type the <ID> of the Parent you want to modify ");
         int toUpdate = scanner.nextInt();
 
@@ -121,7 +135,11 @@ public class ParentsMenu{
             System.out.println("[7] Everything");
             System.out.println("[8] Go back");
 
-            choice = br.readLine();
+            try {
+                choice = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             switch (choice) {
                 case "1":
                     MainMenu.printEmptyLines();

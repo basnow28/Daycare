@@ -74,16 +74,7 @@ public abstract class Person {
     //  Printing
 
     @Override
-    public String toString() {
-        return "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", cpr='" + cpr + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' + ", ";
-    }
-
-    public String toStringConsole(){
-        return String.join(" ", Integer.toString(id), firstName, lastName, cpr, email, phoneNumber);
+    public String toString(){
+        return String.join("  ", Integer.toString(id), firstName, lastName, cpr, email, phoneNumber);
     }
 }

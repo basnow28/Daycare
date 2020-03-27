@@ -23,14 +23,7 @@ public class Parent extends Person{
 
     //  Printing
     @Override
-    public String toString() {
-        return "Parent{" +
-                super.toString() +
-                "childId=" + childId +
-                '}';
-    }
-
-    public String toStringConsole(){
-        return super.toStringConsole() + " " + Integer.toString(childId);
+    public String toString(){
+        return super.toString() + "  " + Integer.toString(childId);
     }
 }

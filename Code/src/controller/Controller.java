@@ -135,7 +135,7 @@ public class Controller {
 
     public void deleteChild(int id){
         String oldLineChild = database.getChildren().get(id).toString();
-        String oldLineParent = database.getParents().get(database.getChildren().get(id).getParentId()).toStringConsole();
+        String oldLineParent = database.getParents().get(database.getChildren().get(id).getParentId()).toString();
         database.getChildren().remove(id);
         database.getParents().get(database.getChildren().get(id).getParentId());
         System.out.println("Child and Parent Information:");
@@ -151,8 +151,8 @@ public class Controller {
         Parent parent = new Parent(id, firstName, lastName,cpr, email, phoneNumber, childId );
         database.getParents().add(parent);
         try {
-            fm.addNewLineToFile(database.getChildren().get(childId).toStringConsole(), database.getChildren().size(), CHILDREN_FILE);
-            fm.addNewLineToFile(parent.toStringConsole(), database.getParents().size(), PARENTS_FILE);
+            fm.addNewLineToFile(database.getChildren().get(childId).toString(), database.getChildren().size(), CHILDREN_FILE);
+            fm.addNewLineToFile(parent.toString(), database.getParents().size(), PARENTS_FILE);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -210,7 +210,7 @@ public class Controller {
                 break;
 
             case "lastName":
-                database.getParents().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
+                database.getParents().get(id).setLastName(validation.getValidatedName("Choose a new Last Name"));
                 break;
             case "cpr":
                 database.getParents().get(id).setCpr(validation.getValidatedCpr("Choose new CPR"));
@@ -226,7 +226,7 @@ public class Controller {
                 break;
             case "everything":
                 database.getParents().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
-                database.getParents().get(id).setLastName(validation.getValidatedName("Choose a new First Name"));
+                database.getParents().get(id).setLastName(validation.getValidatedName("Choose a new Last Name"));
                 database.getParents().get(id).setCpr(validation.getValidatedCpr("Choose new CPR"));
                 database.getParents().get(id).setEmail(validation.getValidatedEmail("Choose new Email"));
                 database.getParents().get(id).setPhoneNumber(validation.getValidatedPhone("Choose new Phone Number"));
@@ -279,9 +279,9 @@ public class Controller {
     }
 
     public void addChildToWaitingList(int childId, int listId) {
-        String oldLine = database.getList(listId).toStringConsole();
+        String oldLine = database.getList(listId).toString();
         database.getList(listId).addChild(childId);
-        String newLine = database.getList(listId).toStringConsole();
+        String newLine = database.getList(listId).toString();
         System.out.println(oldLine);
         System.out.println(newLine);
         try {
@@ -294,7 +294,7 @@ public class Controller {
         WaitingList waitingList = new WaitingList(database.getWaitingLists().size(), quarter, year, capacity);
         database.getWaitingLists().add(waitingList);
         try {
-            fm.addNewLineToFile(waitingList.toStringConsole(), database.getWaitingLists().size(), WAITING_LISTS_FILE);
+            fm.addNewLineToFile(waitingList.toString(), database.getWaitingLists().size(), WAITING_LISTS_FILE);
             System.out.println("Added successfully");
         } catch (IOException e) {
             e.printStackTrace();
@@ -311,16 +311,22 @@ public class Controller {
             }
         }
         for(WaitingList wl : waitingLists){
-            System.out.println(wl.toString());
+            //headline  -  it'll be displayed for every iteration in this case, because you display multiple details
+                        //on multiple lines, otherwise it gets a bit lost
+            System.out.printf("%-5s%-15s%-10s%-15s%-15s%n","ID", "Quarter", "Year", "Capacity", "Children IDs");
+            System.out.println("--------------------------------------------------------------------");
+            //I added it, but it's up to you whether you keep it or not
+            wl.toStringConsole();
             System.out.println("Children: ");
             displayChildrenFromList(wl.getId());
             System.out.println();
+            System.out.println();   //another space is a bit needed, for clarity
         }
         return waitingLists;
     }
 
     public void updateWaitingList(int id, String field) {
-        String oldLine = database.getWaitingLists().get(id).toStringConsole();
+        String oldLine = database.getWaitingLists().get(id).toString();
         String newLine;
         System.out.println(oldLine);
         switch (field.toLowerCase()) {
@@ -339,7 +345,7 @@ public class Controller {
             default:
                 break;
         }
-        newLine = database.getWaitingLists().get(id).toStringConsole();
+        newLine = database.getWaitingLists().get(id).toString();
         System.out.println(newLine);
         try {
             fm.modifyFile(oldLine, newLine, WAITING_LISTS_FILE, database.getWaitingLists());
@@ -350,9 +356,9 @@ public class Controller {
     }
 
     public void deleteChildFromList(int listId, int id) {
-        String oldLine = database.getWaitingLists().get(listId).toStringConsole();
+        String oldLine = database.getWaitingLists().get(listId).toString();
         database.getWaitingLists().get(listId).deleteChild(id);
-        String newLine = database.getWaitingLists().get(listId).toStringConsole();
+        String newLine = database.getWaitingLists().get(listId).toString();
 
         try {
             fm.modifyFile(oldLine, newLine, WAITING_LISTS_FILE, database.getWaitingLists());
@@ -647,7 +653,7 @@ public class Controller {
                     System.out.println("----------------------------------------------------");
                     ok_headline = true;
                 }
-                e.toStringConsole();
+                e.toString();
             }
         }
 

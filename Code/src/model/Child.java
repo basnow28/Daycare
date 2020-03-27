@@ -75,15 +75,11 @@ public class Child{
     }
 
     //  Printing
-    public String toStringConsole(){
-        return String.join("\t", Integer.toString(id), firstName, lastName, Integer.toString(age),
-                cpr, Integer.toString(parentId));   //age was missing
+    public void toStringConsoleFormat(){
+        System.out.printf("%-5d%-15s%-15s%-15s%-5d%-5d%n",id, firstName, lastName, cpr, age, parentId);
     }
 
-    public void toStringConsoleFormat(){
-        System.out.printf("%-5d%-15s%-15s%-5d%-15s%-5d%n",id, firstName, lastName, age, cpr, parentId);
-    }
     public String toString(){
-        return String.join(" ", Integer.toString(id), firstName, lastName, cpr);
+        return String.join("  ", Integer.toString(id), firstName, lastName, Integer.toString(age), cpr, Integer.toString(parentId));
     }
 }

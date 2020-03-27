@@ -19,10 +19,11 @@ public class MainMenu {
     private static void displayMainMenuAdmin(){
         System.out.println("\t\t\t -MENU- \t\t\t");
         System.out.println("1. Manage children menu");
-        System.out.println("2. Manage employee menu");
-        System.out.println("3. Manage waiting list menu");
-        System.out.println("4. Manage work schedule menu");
-        System.out.println("5. Exit");
+        System.out.println("2. Manage parents menu");
+        System.out.println("3. Manage employee menu");
+        System.out.println("4. Manage waiting list menu");
+        System.out.println("5. Manage work schedule menu");
+        System.out.println("6. Exit");
     }
 
     // to me it makes sense to only have 2 options for employees, obviously we can change this after
@@ -54,27 +55,35 @@ public class MainMenu {
 
                 case "2":
                     printEmptyLines();
+                    ParentsMenu.parentsMenu();
+                    printEmptyLines();
+
+                case "3":
+                    printEmptyLines();
                     EmployeeMenu.employeeMenu();
                     printEmptyLines();
                     break;
 
-                case "3":
+                case "4":
                     printEmptyLines();
                     ListMenu.listMenu();
                     printEmptyLines();
                     break;
 
-                case "4":
+                case "5":
                     printEmptyLines();
                     WorkScheduleMenu.workScheduleMenu();
                     printEmptyLines();
                     break;
 
 
-                case "5":
+                case "6":
                     break;
+
+                default:
+                    System.out.println("Wrong input");
             }
-        } while (!choice.equals("5"));
+        } while (!choice.equals("6"));
     }
 
     private static void mainMenuForEmployee(){

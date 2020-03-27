@@ -106,7 +106,7 @@ public class FileManagement {
         Quarter quarter;
 
         while((line = br.readLine()) != null) {
-            String[] split = line.split("\\s+");
+            String[] split = line.split("  ");  //fixed amount of spaces between tokens
 
             //WAITING LIST
             id = Integer.parseInt(split[0]);
@@ -161,7 +161,7 @@ public class FileManagement {
             employeeId = Integer.parseInt(split[1]);
             shifts = split[2];
 
-            WorkSchedule workSchedule = new WorkSchedule(id,employeeId, shifts);
+            WorkSchedule workSchedule = new WorkSchedule(id,employeeId,shifts);
             workSchedules.add(workSchedule);
         }
     }
@@ -184,7 +184,9 @@ public class FileManagement {
         input.close();
 
         String newText = oldText.replace(oldLine,newLine);
-
+        System.out.println(oldLine);
+        System.out.println(newLine);
+        System.out.println(oldText);
         FileWriter output = new FileWriter(fileName);
         output.write(newText);
         output.close();

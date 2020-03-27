@@ -22,7 +22,7 @@ public class ListMenu {
         System.out.println("5. Go back");
     }
 
-    public static void listMenu(){
+    public static void listMenu() {
         String choice = "-1";
         do {
             displayListMenu();
@@ -51,7 +51,6 @@ public class ListMenu {
                     MainMenu.printEmptyLines();
                     break;
                 case "5":
-                    MainMenu.mainMenuAdmin();
                     break;
             }
         } while (!choice.equals("5"));
@@ -71,7 +70,7 @@ public class ListMenu {
         MainMenu.typeAnyKey();
     }
 
-    private static void searchForList(){
+    private static void searchForList() {
         System.out.println("Write any field from the list you want to work on");
         String key = scanner.next();
 
